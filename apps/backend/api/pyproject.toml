@@ -4,11 +4,16 @@ version = "0.1.0"
 description = "DreamManor - FastApi and Quasar"
 authors = ["kochenov <kochenof@yandex.ru>"]
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
-fastapi = "^0.110.0"
+fastapi = {extras = ["all"], version = "^0.110.0"}
+pydantic-settings = "^2.2.1"
 
+[tool.mypy]
+strict = true
+exclude = ["venv", "alembic"]
 
 [build-system]
 requires = ["poetry-core"]
