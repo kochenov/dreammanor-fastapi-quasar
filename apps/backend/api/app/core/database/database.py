@@ -1,30 +1,27 @@
 from typing import AsyncGenerator
 
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
-from sqlmodel import create_engine, Session, SQLModel, Field
-
-# Импортируем настройки из вашего файла конфигурации
+from sqlalchemy.orm import DeclarativeBase, declared_attr, Mapped, mapped_column
 from app.core.config import settings
 
 
-# Создаем асинхронный движок базы данных на основе настроек
-async_engine = create_async_engine(settings.database_url)
+engine = create_async_engine(str(settings.SQLALCHEMY_DATABASE_URI))
 
-# Фабрика для создания асинхронных сессий
 async_session_maker = async_sessionmaker(
-    engine=async_engine, class_=AsyncSession, expire_on_commit=False
+    engine, class_=AsyncSession, expire_on_commit=False
 )
 
 
-class Base(SQLModel):
-    # __tablename__ = Field(default_factory=lambda cls: f"{cls.__name__.lower()}s")
+class BaseModel(DeclarativeBase):
+    __abstract__ = True
 
-    id: int = Field(default=None, primary_key=True)
+    @declared_attr.directive
+    def __tablename__(cls) -> str:
+        return f"{cls.__name__.lower()}s"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
 
 
 async def get_async_session() -> AsyncGenerator[AsyncSession, None]:
-    """
-    Асинхронный генератор для получения сессии базы данных.
-    """
     async with async_session_maker() as session:
         yield session
