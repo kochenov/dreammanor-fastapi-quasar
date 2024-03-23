@@ -17,3 +17,13 @@ class Link(BaseModel):
     comment = Column(String, nullable=True, default=None)
     link_img = Column(String, nullable=True, default=None)
     created_ad = Column(DateTime, default=datetime.datetime.now())
+
+
+class Process(BaseModel):
+    """Описание таблицы базы данных процесса парсинга"""
+    __tablename__ = "process"
+    id = Column(Integer, primary_key=True)
+    iterate = Column(Integer, default=0)
+    page = Column(Integer, default=1)
+    error = Column(Boolean, default=False)
+    created_ad = Column(DateTime, default=datetime.datetime.now())

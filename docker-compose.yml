@@ -1,4 +1,4 @@
-version: "3.11"
+version: "3"
 
 services:
   db:
@@ -16,3 +16,128 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
       - POSTGRES_USER=${POSTGRES_USER?Variable not set}
       - POSTGRES_DB=${POSTGRES_DB?Variable not set}
+
+  backend:
+    image: '${DOCKER_IMAGE_BACKEND?Variable not set}:${TAG-latest}'
+    container_name: backend_api
+    build:
+      context: ./apps/backend/api
+      args:
+        INSTALL_DEV: ${INSTALL_DEV-false}
+    env_file:
+      - .env
+    environment:
+      - DOMAIN=${DOMAIN}
+      - ENVIRONMENT=${ENVIRONMENT}
+      - BACKEND_CORS_ORIGINS=${BACKEND_CORS_ORIGINS}
+      - SECRET_KEY=${SECRET_KEY?Variable not set}
+      - FIRST_SUPERUSER=${FIRST_SUPERUSER?Variable not set}
+      - FIRST_SUPERUSER_PASSWORD=${FIRST_SUPERUSER_PASSWORD?Variable not set}
+      - USERS_OPEN_REGISTRATION=${USERS_OPEN_REGISTRATION}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - EMAILS_FROM_EMAIL=${EMAILS_FROM_EMAIL}
+      - POSTGRES_SERVER=db
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER?Variable not set}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
+      - SENTRY_DSN=${SENTRY_DSN}
+    #    ports:
+    #      - "8000:8000"
+    #    restart: always
+    command: [ "/usr/src/app/docker/app.sh" ]
+    depends_on:
+      - db
+          - selenium-hub
+          - chrome
+    networks:
+      - default
+      - traefik-public
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik-public
+      - traefik.constraint-label=traefik-public
+      - traefik.http.services.${STACK_NAME?Variable not set}-backend.loadbalancer.server.port=8000
+      - traefik.http.routers.${STACK_NAME?Variable not set}-backend-http.rule=Host(`${DOMAIN?Variable not set}`) && PathPrefix(`/api`) || Host(`${DOMAIN?Variable not set}`) && PathPrefix(`/docs`)
+      - traefik.http.routers.${STACK_NAME?Variable not set}-backend-http.entrypoints=http
+
+# Сервис Traefik
+  traefik:
+    # Образ Docker
+    image: traefik:3.0
+    container_name: proxy-panel
+    # Отображение портов
+    ports:
+      # HTTP (80)
+      - "80:80"
+      # HTTPS (443)
+      - "443:443"
+    # Перезапуск сервиса
+#    restart: always
+    # Метки для Traefik
+    labels:
+      # Включение Traefik для этого сервиса
+      - traefik.enable=true
+      # Подключение к сети traefik-public
+      - traefik.docker.network=traefik-public
+      # Порт панели управления Traefik
+      - traefik.http.services.traefik-dashboard.loadbalancer.server.port=8080
+      # Настройка маршрутизаторов
+      # --- Панель управления Traefik
+      - traefik.http.routers.traefik-dashboard-http.entrypoints=http
+      - traefik.http.routers.traefik-dashboard-http.rule=Host(`traefik.${DOMAIN?Variable not set}`)
+#      - traefik.http.routers.traefik-dashboard-https.entrypoints=https
+#      - traefik.http.routers.traefik-dashboard-https.rule=Host(`traefik.${DOMAIN?Variable not set}`)
+#      - traefik.http.routers.traefik-dashboard-https.tls=true
+#      - traefik.http.routers.traefik-dashboard-https.tls.certresolver=le
+#      - traefik.http.routers.traefik-dashboard-https.service=api@internal
+      # --- Перенаправление HTTP на HTTPS
+#      - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
+#      - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
+#      - traefik.http.routers.traefik-dashboard-http.middlewares=https-redirect
+      # --- HTTP-аутентификация для панели управления
+      - traefik.http.middlewares.admin-auth.basicauth.users=${USERNAME?Variable not set}:${HASHED_PASSWORD?Variable not set}
+#      - traefik.http.routers.traefik-dashboard-https.middlewares=admin-auth
+    # Тома для хранения данных
+    volumes:
+      # Сокет Docker
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      # Сертификаты
+      - traefik-public-certificates:/certificates
+    # Команды для запуска Traefik
+    command:
+      # Включение Docker
+      - --providers.docker
+      # Обработка только явно отмеченных сервисов
+      - --providers.docker.exposedbydefault=true
+      # Точки входа (http и https)
+      - --entrypoints.http.address=:80
+      - --entrypoints.https.address=:443
+      # Получение сертификатов Let's Encrypt
+#      - --certificatesresolvers.le.acme.email=${EMAIL?Variable not set}
+#      - --certificatesresolvers.le.acme.storage=/certificates/acme.json
+#      - --certificatesresolvers.le.acme.tlschallenge=true
+      # Логи
+      - --accesslog
+      - --log
+      # Включение панели управления
+      - --api.dashboard=true
+      - --api.insecure=true
+    # Подключение к сети
+    networks:
+      # Сеть traefik-public
+      - traefik-public
+
+# Определение томов
+volumes:
+  # Том для сертификатов
+  traefik-public-certificates:
+
+# Определение сетей
+networks:
+  # Сеть traefik-public
+  traefik-public:
+    # Внешняя сеть
+    external: true

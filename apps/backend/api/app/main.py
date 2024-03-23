@@ -1,10 +1,11 @@
 from fastapi import FastAPI  # Импорт FastAPI для создания приложения
 
 from fastapi.routing import APIRoute  # Импорт класса APIRoute для работы с маршрутами
+from fastapi_pagination import add_pagination
 
 from starlette.middleware.cors import CORSMiddleware  # Импорт CORSMiddleware для обработки CORS
 
-from app.modules import routers  # Импорт маршрутов из модуля app.modules.routers
+from app.modules.routers import routers  # Импорт маршрутов из модуля app.modules.routers
 
 from app.core import settings  # Импорт настроек из модуля app.core.settings
 
@@ -29,6 +30,7 @@ app = FastAPI(
     openapi_url=f"{settings.API_V1_STR}/openapi.json",  # URL документации OpenAPI
     generate_unique_id_function=custom_generate_unique_id,  # Функция для уникальных ID маршрутов
 )
+add_pagination(app)
 
 # Включение CORS middleware (при наличии разрешенных доменов в настройках)
 if settings.BACKEND_CORS_ORIGINS:
@@ -44,3 +46,5 @@ if settings.BACKEND_CORS_ORIGINS:
 
 # Подключение маршрутов из модуля routers с префиксом из настроек
 app.include_router(routers, prefix=settings.API_V1_STR)
+
+
