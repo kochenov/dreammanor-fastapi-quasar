@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6666182c-9993-4efa-be4b-dd8bc7b6d8d1" name="Changes" comment="Настроен модуль парсинг, CRUD Links">
+      <change afterPath="$PROJECT_DIR$/apps/backend/api/app/core/logger.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/backend/api/docker/celery.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/core/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/core/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/core/database/base_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/core/database/base_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/utils/process.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/utils/process.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/utils/web_driver_current.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/utils/web_driver_current.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/tasks/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/tasks/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/poetry.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2du7dIrU4sooMsAQPajt0oxbnJV" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/MyProgramm/dreammanor-fastapi-quasar/apps/backend/api&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\MyProgramm\dreammanor-fastapi-quasar\apps\backend\api" />
+      <recent name="C:\MyProgramm\dreammanor-fastapi-quasar\apps\backend\api\app\core" />
+      <recent name="C:\MyProgramm\dreammanor-fastapi-quasar\apps\backend\api\docker" />
+      <recent name="C:\MyProgramm\dreammanor-fastapi-quasar" />
+      <recent name="C:\MyProgramm\dreammanor-fastapi-quasar\apps\backend\api\app\modules\real_estate\parsing\utils" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\MyProgramm\dreammanor-fastapi-quasar\apps\backend\api\app\tasks" />
+      <recent name="C:\MyProgramm\dreammanor-fastapi-quasar\apps\backend\api\app\modules\real_estate\parsing" />
+      <recent name="C:\MyProgramm\dreammanor-fastapi-quasar\apps\backend\api" />
+      <recent name="C:\MyProgramm\dreammanor-fastapi-quasar\apps\backend\api\app" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
+    <configuration name="FastApi" type="PythonConfigurationType" factoryName="Python">
+      <module name="dreammanor-fastapi-quasar" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="ENVIRONMENT" value="local" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\MyProgramm\dreammanor-fastapi-quasar\apps\backend\api" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="net.ashald.envfile">
+        <option name="IS_ENABLED" value="true" />
+        <option name="IS_SUBST" value="true" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="true" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="true" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+          <ENTRY IS_ENABLED="true" PARSER="env" IS_EXECUTABLE="false" PATH=".env" />
+        </ENTRIES>
+      </EXTENSION>
+      <option name="SCRIPT_NAME" value="uvicorn" />
+      <option name="PARAMETERS" value="app.main:app --reload --env-file C:\MyProgramm\dreammanor-fastapi-quasar\.env" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="true" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="envFilePath" value="" />
+          <option name="commandLineOptions" value="--build" />
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.backend: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="backend" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.celery: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="celery" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.db: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="db" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.redis: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="redis" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Docker.docker-compose.yml.backend: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.celery: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.redis: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.db: Compose Deployment" />
+      <item itemvalue="Python.FastApi" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.backend: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.redis: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.db: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.celery: Compose Deployment" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6666182c-9993-4efa-be4b-dd8bc7b6d8d1" name="Changes" comment="" />
+      <created>1710846197690</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1710846197690</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Работает только конфигурация. Запуск без ошибок">
+      <option name="closed" value="true" />
+      <created>1710851667633</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1710851667633</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Добавлен сервис докер базы данных">
+      <option name="closed" value="true" />
+      <created>1710924817149</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1710924817149</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Добавлена работа с БД/ Отказ от SQLModel">
+      <option name="closed" value="true" />
+      <created>1710929481921</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1710929481921</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Настроен модуль парсинг, CRUD Links">
+      <option name="closed" value="true" />
+      <created>1711205791568</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1711205791568</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Работает только конфигурация. Запуск без ошибок" />
+    <MESSAGE value="Добавлен сервис докер базы данных" />
+    <MESSAGE value="Добавлена работа с БД/ Отказ от SQLModel" />
+    <MESSAGE value="Настроен модуль парсинг, CRUD Links" />
+    <option name="LAST_COMMIT_MESSAGE" value="Настроен модуль парсинг, CRUD Links" />
+  </component>
+</project>
