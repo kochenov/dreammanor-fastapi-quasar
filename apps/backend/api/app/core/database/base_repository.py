@@ -54,7 +54,8 @@ class BaseRepository:
                 .order_by(cls.model.id.desc())
                 .limit(1)
             )
-            return await session.execute(query).scalar_one_or_none()
+            result = await session.execute(query)
+            return result.scalar_one_or_none()
 
     @classmethod
     async def get_all(cls, **filters):
@@ -72,13 +73,13 @@ class BaseRepository:
         """
         async with async_session_maker() as session:
             query = (
-                select(cls.model.__table__.columns)
+                select(cls.model)
                 .filter_by(**filters)
                 .order_by(cls.model.id.desc())
+                .limit(1)
             )
-
             result = await session.execute(query)
-            return result.mappings().all()
+            return result.scalar_one_or_none()
 
     @classmethod
     async def create(cls, **data):

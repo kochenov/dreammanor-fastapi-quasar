@@ -61,6 +61,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
 
     DOMAIN: str = "localhost"  # Домен приложения
+    SELENIUM_HUB_HOST: str
     ENVIRONMENT: Literal["local", "staging", "production"] = "local"  # Окружение (local, staging, production)
 
     @computed_field  # Поле, вычисляемое автоматически

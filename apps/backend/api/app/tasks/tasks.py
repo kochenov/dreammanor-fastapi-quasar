@@ -1,6 +1,5 @@
 import asyncio
 
-from requests import get
 from app.tasks.celery import celery_app
 from app.modules.real_estate.parsing.utils.process import Process
 

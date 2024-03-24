@@ -18,6 +18,8 @@ celery = {extras = ["redis"], version = "^5.3.6"}
 beautifulsoup4 = "^4.12.3"
 selenium = "^4.18.1"
 webdriver-manager = "^4.0.1"
+python-json-logger = "^2.0.7"
+flower = "^2.0.1"
 
 
 [tool.poetry.group.dev.dependencies]
