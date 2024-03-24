@@ -4,18 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6666182c-9993-4efa-be4b-dd8bc7b6d8d1" name="Changes" comment="Настроен модуль парсинг, CRUD Links">
-      <change afterPath="$PROJECT_DIR$/apps/backend/api/app/core/logger.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/backend/api/docker/celery.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/core/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/core/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/core/database/base_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/core/database/base_repository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/utils/process.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/utils/process.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/utils/web_driver_current.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/utils/web_driver_current.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/tasks/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/tasks/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+    <list default="true" id="6666182c-9993-4efa-be4b-dd8bc7b6d8d1" name="Changes" comment="Рабочий Парсинг списка ссылок Версия 1 / настройки">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,7 +221,23 @@
       <option name="project" value="LOCAL" />
       <updated>1711205791568</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Рабочий Парсинг списка ссылок Версия 1">
+      <option name="closed" value="true" />
+      <created>1711283084876</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1711283084877</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Рабочий Парсинг списка ссылок Версия 1 / настройки">
+      <option name="closed" value="true" />
+      <created>1711283221300</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1711283221300</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -250,6 +256,8 @@
     <MESSAGE value="Добавлен сервис докер базы данных" />
     <MESSAGE value="Добавлена работа с БД/ Отказ от SQLModel" />
     <MESSAGE value="Настроен модуль парсинг, CRUD Links" />
-    <option name="LAST_COMMIT_MESSAGE" value="Настроен модуль парсинг, CRUD Links" />
+    <MESSAGE value="Рабочий Парсинг списка ссылок Версия 1" />
+    <MESSAGE value="Рабочий Парсинг списка ссылок Версия 1 / настройки" />
+    <option name="LAST_COMMIT_MESSAGE" value="Рабочий Парсинг списка ссылок Версия 1 / настройки" />
   </component>
 </project>
