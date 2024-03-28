@@ -1,0 +1,19 @@
+// app global css in SCSS form
+// app global css in SCSS form
+
+body {
+  font-family: "Bitter", serif;
+}
+
+.color-bg {
+  background-color: $secondary
+}
+.color-text {
+  color: #194484;
+}
+.bg-promo {
+  background-color: $promo;
+}
+.text-weight-bold {
+  font-weight: 600;
+}

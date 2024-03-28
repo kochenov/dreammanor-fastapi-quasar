@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "home",
+    "icon": "home",
+    "label": null
+  },
+  {
+    "id": 2,
+    "name": "news",
+    "icon": "newspaper",
+    "label": "Новости"
+  },
+  {
+    "id": 3,
+    "name": "about",
+    "icon": "business",
+    "label": "О нас"
+  },
+  {
+    "id": 4,
+    "name": "desk",
+    "icon": "real_estate_agent",
+    "label": "Объявления"
+  },
+  {
+    "id": 5,
+    "name": "blogs",
+    "icon": "rss_feed",
+    "label": "Блоги"
+  },
+  {
+    "id": 6,
+    "name": "articles",
+    "icon": "feed",
+    "label": "Статьи"
+  },
+  {
+    "id": 7,
+    "name": "calculate",
+    "icon": "calculate",
+    "label": "Расчёты"
+  },
+  {
+    "id": 8,
+    "name": "calendars",
+    "icon": "calendar_month",
+    "label": "Календари"
+  }
+]
