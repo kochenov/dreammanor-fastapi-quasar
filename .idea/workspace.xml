@@ -5,7 +5,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6666182c-9993-4efa-be4b-dd8bc7b6d8d1" name="Changes" comment="Рабочий Парсинг списка ссылок Версия 1 / настройки">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/.eslintignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/.eslintrc.cjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/.npmrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/.vscode/extensions.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/jsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/postcss.config.cjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/public/icons/favicon-128x128.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/public/icons/favicon-16x16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/public/icons/favicon-32x32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/public/icons/favicon-96x96.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/quasar.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/src/App.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/src/assets/quasar-logo-vertical.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/src/boot/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/src/boot/axios.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/src/components/EssentialLink.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/src/css/app.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/src/css/quasar.variables.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/src/layouts/MainLayout.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/src/pages/ErrorNotFound.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/src/pages/IndexPage.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/src/router/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/src/router/routes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/src/stores/example-store.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/src/stores/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/dreammanor-fastapi-quasar/src/stores/store-flag.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
