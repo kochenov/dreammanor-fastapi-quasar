@@ -29,7 +29,7 @@
     </p>
   </q-scroll-area>
   <div
-    class="absolute-top flex flex-center text-center column shadow-1 bg-secondary"
+    class="absolute-top flex flex-center text-center column shadow-1 color-bg"
     style="height: 130px"
   >
     <q-img

@@ -2,7 +2,7 @@
   "home": [
     {
       "id": 1,
-      "name": "home",
+      "name": "/",
       "label": "Главная"
     },
     {

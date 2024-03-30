@@ -1,7 +1,6 @@
 <template>
   <div class="box q-my-lg q-mx-xs">
     <q-card class="my-card" flat bordered>
-
       <div class="row wrap-md no-wrap-lg items-center title-container">
         <div class="col">
           <q-item>
@@ -11,8 +10,7 @@
 
             <q-item-section>
               <q-item-label
-                >РИА Новости: Устроивших теракт в «Крокусе» завербовали через
-                Telegram-канал ИГ</q-item-label
+                >Объявления подготовленные для парсинга</q-item-label
               >
               <q-item-label caption class="text-red-10">
                 Не опубликованные
@@ -44,7 +42,7 @@
             />
 
             <q-btn-dropdown
-              class="title-tabs"
+              class="title-tabs q-mr-lg"
               auto-close
               dense
               no-caps
@@ -76,40 +74,56 @@
 
         <q-separator vertical />
 
-        <q-card-section class="col-lg-3 col-sm-12 col-md-4 col-xl-2 position-relative">
+        <q-card-section
+          class="col-lg-3 col-sm-12 col-md-4 col-xl-2 position-relative"
+        >
           <q-list class="position-sticky position">
-            <q-item clickable>
+            <!-- -->
+
+            <!-- -->
+            <q-item tag="label" v-ripple>
               <q-item-section avatar>
-                <q-icon color="primary" name="local_bar" />
+                <q-icon color="primary" name="smart_display" />
               </q-item-section>
 
               <q-item-section>
-                <q-item-label>Bar XYZ</q-item-label>
-                <q-item-label caption>Have a drink.</q-item-label>
+                <q-item-label>Видео</q-item-label>
+              </q-item-section>
+              <q-item-section side>
+                <q-toggle
+                  color="blue"
+                  @click="getListAsd()"
+                  v-model="parserStore.filters.is_video"
+                  val="battery"
+                />
               </q-item-section>
             </q-item>
 
-            <q-item clickable>
-              <q-item-section avatar>
-                <q-icon color="red" name="local_gas_station" />
-              </q-item-section>
-
-              <q-item-section>
-                <q-item-label>Gas Station</q-item-label>
-                <q-item-label caption>Fill your gas tank.</q-item-label>
-              </q-item-section>
-            </q-item>
-
-            <q-item clickable>
-              <q-item-section avatar>
-                <q-icon color="amber" name="local_movies" />
-              </q-item-section>
-
-              <q-item-section>
-                <q-item-label>Cinema XYZ</q-item-label>
-                <q-item-label caption>Watch a movie.</q-item-label>
-              </q-item-section>
-            </q-item>
+            <q-expansion-item
+              expand-separator
+              icon="payments"
+              label="Диапазон цен"
+            >
+              <q-card>
+                <q-card-section>
+                  Цена от {{ price.min }} до {{ price.max }} руб
+                  <q-range
+                    @change="updatePriceFilter()"
+                    v-model="price"
+                    :min="0"
+                    :max="3000000"
+                    :step="50000"
+                  />
+                </q-card-section>
+              </q-card>
+            </q-expansion-item>
+            <q-expansion-item
+              expand-separator
+              icon="new_releases"
+              label="Статус объявлений"
+            >
+              <q-select v-model="parserStore.filters.status_id" @update:model-value="getListAsd()" emit-value :options="status_options" label="Выбери статус"
+            /></q-expansion-item>
           </q-list>
         </q-card-section>
       </q-card-section>
@@ -122,15 +136,48 @@ import { useRoute } from "vue-router";
 import { ref, watch } from "vue";
 import TestPart1 from "./TestPart1.vue";
 import TestPart2 from "./TestPart2.vue";
+import { useRealEstateParserStore } from "src/modules/real_estate";
 
 const route = useRoute();
 const part = { TestPart1, TestPart2 };
+const price = ref({
+  min: 100000,
+  max: 650000,
+});
+const status_options = ref([
+        {
+          label: 'Не опубликован',
+          value: 0,
+        },
+        {
+          label: 'Не подходит',
+          value: 2,
+        },
+        {
+          label: 'Вертикальное видео',
+          value: 3,
+        },
+        {
+          label: 'Чёрный список',
+          value: 4,
+        }
+      ]);
 
+const parserStore = useRealEstateParserStore();
+
+const getListAsd = async () => {
+  await parserStore.getLinks();
+  //items.value = parserStore.parser_links.items;
+};
+
+const updatePriceFilter = async () => {
+  parserStore.filters.max_price = price.value.max;
+  parserStore.filters.min_price = price.value.min;
+  await getListAsd();
+};
 watch(
   () => route.query.tab,
-  async (newId) => {
-
-  }
+  async (newId) => {}
 );
 </script>
 
@@ -145,9 +192,8 @@ watch(
     flex-direction: column;
     padding: 20px 0;
   }
-.card-content{
+  .card-content {
     flex-direction: column-reverse;
   }
-
 }
 </style>

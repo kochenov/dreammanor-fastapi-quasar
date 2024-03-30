@@ -50,8 +50,6 @@ services:
     command: [ "/usr/src/app/docker/app.sh" ]
     depends_on:
       - db
-      - selenium-hub
-      - chrome
     networks:
       - default
       - traefik-public
@@ -103,6 +101,7 @@ services:
       - redis
       - backend
       - selenium-hub
+      - chrome
 
   flower:
     image: '${DOCKER_IMAGE_BACKEND?Variable not set}:${TAG-latest}'
@@ -134,9 +133,7 @@ services:
     container_name: flower_app
     command: [ "/usr/src/app/docker/celery.sh", "flower" ]
     depends_on:
-      - redis
       - celery
-      - backend
     ports:
       - "8888:5555"
     restart: always

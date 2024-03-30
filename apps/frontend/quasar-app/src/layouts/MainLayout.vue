@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lhh lpr lfr">
-    <q-header elevated class="bg-secondary text-white" height-hint="98">
+    <q-header elevated class="color-bg text-white" height-hint="98">
       <q-toolbar>
         <q-btn
           dense
@@ -25,6 +25,7 @@
         />
       </q-toolbar>
       <sub-menu />
+      <promo-header />
     </q-header>
 
     <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
@@ -57,6 +58,7 @@ import { ref } from "vue";
 import MainMenu from "components/navigation/MainMenu.vue";
 import SubMenu from "components/navigation/SubMenu.vue";
 import PartLeft from "components/parts/PartLeft.vue";
+import PromoHeader from "components/blocks/promo/PromoHeader.vue";
 
 const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);
