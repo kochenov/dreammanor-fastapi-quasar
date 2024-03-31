@@ -2,197 +2,234 @@
   "home": [
     {
       "id": 1,
-      "name": "/",
-      "label": "Главная"
+      "name": "home",
+      "label": "Главная",
+      "path": "/"
     },
     {
       "id": 2,
       "name": "topBlogers",
-      "label": "Топ блогеров"
+      "label": "Топ блогеров",
+      "path": "topBlogers"
     },
     {
       "id": 3,
       "name": "topVideo",
-      "label": "Топ видео"
+      "label": "Топ видео",
+      "path": "topVideo"
     },
     {
       "id": 4,
       "name": "reitingGroup",
-      "label": "Рейтинг сообществ"
+      "label": "Рейтинг сообществ",
+      "path": "reitingGroup"
     }
   ],
   "news": [
     {
       "id": 1,
       "name": "posts/all-posts",
-      "label": "Все новости"
+      "label": "Все новости",
+      "path": "posts/all-posts"
     },
     {
       "id": 2,
       "name": "actions",
-      "label": "События"
+      "label": "События",
+      "path": "actions"
     },
     {
       "id": 3,
       "name": "newUsers",
-      "label": "Новые пользователи"
+      "label": "Новые пользователи",
+      "path": "newUsers"
     },
     {
       "id": 4,
       "name": "records",
-      "label": "Рекорды портала"
+      "label": "Рекорды портала",
+      "path": "records"
     }
   ],
   "about": [
     {
       "id": 1,
       "name": "about",
-      "label": "О сайте"
+      "label": "О сайте",
+      "path": "about"
     },
     {
       "id": 2,
       "name": "contacts",
-      "label": "Контакты"
+      "label": "Контакты",
+      "path": "contacts"
     },
     {
       "id": 3,
       "name": "forPartners",
-      "label": "Партнёрам"
+      "label": "Партнёрам",
+      "path": "forPartners"
     },
     {
       "id": 4,
       "name": "forAuthors",
-      "label": "Авторам"
+      "label": "Авторам",
+      "path": "forAuthors"
     },
     {
       "id": 5,
       "name": "forEditors",
-      "label": "Стать автором"
+      "label": "Стать автором",
+      "path": "forEditors"
     },
     {
       "id": 6,
       "name": "feedback",
-      "label": "Обратная связь"
+      "label": "Обратная связь",
+      "path": "feedback"
     },
     {
       "id": 7,
       "name": "rules",
-      "label": "Правила"
+      "label": "Правила",
+      "path": "rules"
     }
   ],
   "desk": [
     {
       "id": 1,
-      "name": "realEstate",
+      "name": "/real-estate/parsing/list",
+      "path": "real-estate/parsing/list",
       "label": "Недвижимость"
     },
     {
       "id": 2,
       "name": "products",
-      "label": "Продукция"
+      "label": "Продукция",
+      "path": "products"
     },
     {
       "id": 3,
       "name": "animals",
-      "label": "Животные"
+      "label": "Животные",
+      "path": "animals"
     },
     {
       "id": 4,
       "name": "addAds",
-      "label": "Добавить объявление"
+      "label": "Добавить объявление",
+      "path": "addAds"
     }
   ],
   "blogs": [
     {
       "id": 1,
       "name": "allPosts",
-      "label": "Все записи"
+      "label": "Все записи",
+      "path": "allPosts"
     },
     {
       "id": 2,
       "name": "listBlogs",
-      "label": "Список блогов"
+      "label": "Список блогов",
+      "path": "listBlogs"
     },
     {
       "id": 3,
       "name": "blogers",
-      "label": "Блогеры"
+      "label": "Блогеры",
+      "path": "blogers"
     },
     {
       "id": 4,
       "name": "addBlog",
-      "label": "Создать блог"
+      "label": "Создать блог",
+      "path": "addBlog"
     }
   ],
   "articles": [
     {
       "id": 1,
       "name": "useful",
-      "label": "Полезное"
+      "label": "Полезное",
+      "path": "addBlog"
+
     },
     {
       "id": 2,
       "name": "vegetableGarden",
-      "label": "Огород и сад"
+      "label": "Огород и сад",
+      "path": "addBlog"
     },
     {
       "id": 3,
       "name": "animalHusbandry",
-      "label": "Животноводство"
+      "label": "Животноводство",
+      "path": "addBlog"
     },
     {
       "id": 4,
       "name": "addArticle",
-      "label": "Добавить статью"
+      "label": "Добавить статью",
+      "path": "addBlog"
     }
   ],
   "calculate": [
     {
       "id": 1,
       "name": "seeding",
-      "label": "Расчёты посева"
+      "label": "Расчёты посева",
+      "path": "addBlog"
     },
     {
       "id": 2,
       "name": "feedCalculation",
-      "label": "Расчёт корма"
+      "label": "Расчёт корма",
+      "path": "addBlog"
     },
     {
       "id": 3,
       "name": "weightControl",
-      "label": "Контроль веса"
+      "label": "Контроль веса",
+      "path": "addBlog"
     },
     {
       "id": 4,
       "name": "businesPlans",
-      "label": "Бизнес планы"
+      "label": "Бизнес планы",
+      "path": "addBlog"
     },
     {
       "id": 5,
       "name": "userCalculations",
-      "label": "Расчёты пользователей"
+      "label": "Расчёты пользователей",
+      "path": "addBlog"
     }
   ],
   "calendars": [
     {
       "id": 1,
       "name": "taskList",
-      "label": "Список задач"
+      "label": "Список задач",
+      "path": "addBlog"
     },
     {
       "id": 2,
       "name": "recommendations",
-      "label": "Рекомендации"
+      "label": "Рекомендации",
+      "path": "addBlog"
     },
     {
       "id": 3,
       "name": "userTasks",
-      "label": "Задачи пользователей"
+      "label": "Задачи пользователей",
+      "path": "addBlog"
     },
     {
       "id": 4,
       "name": "addTask",
-      "label": "Добавить задачу"
+      "label": "Добавить задачу",
+      "path": "addBlog"
     }
   ]
 }

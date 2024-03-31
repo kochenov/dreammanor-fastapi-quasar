@@ -13,8 +13,9 @@
   >
     <q-route-tab
       v-for="item in topmenu"
-      :to="item.name == 'home' ? '/' : { query: { submenu: item.name } }"
+      :to="item.path == '/' ? '/' : { query: { submenu: item.name } }"
       :key="item.id"
+      :class="item.name == $route.matched[0].name ? 'my-active' : '' "
       exact
       :icon="item.icon"
       :label="item.label"
@@ -49,6 +50,11 @@ onMounted(() => {
 
 <style lang="scss">
 #topmenu {
+  .my-active{
+    .q-tab__indicator {
+      opacity: 1 !important;
+    }
+  }
   .q-tab {
     min-height: 48px !important;
   }

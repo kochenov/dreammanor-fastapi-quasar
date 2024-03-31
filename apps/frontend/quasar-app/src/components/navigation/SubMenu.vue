@@ -2,10 +2,10 @@
   <q-tabs align="left" class="bg-primary text-white" id="submenu">
     <q-route-tab
       v-for="item in submenu[
-        $route.query.submenu ? $route.query.submenu : 'home'
+        $route.query.submenu || $route.matched[0].name
       ]"
       :key="item.id"
-      :to="item.name"
+      :to="item.path"
       :label="item.label"
     />
   </q-tabs>
