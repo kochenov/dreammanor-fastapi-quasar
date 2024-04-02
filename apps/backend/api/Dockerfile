@@ -35,4 +35,3 @@ EXPOSE 8000
 #RUN alembic upgrade head
 
 RUN chmod a+x docker/*.sh
-CMD ["alembic", "upgrade", "head"]
