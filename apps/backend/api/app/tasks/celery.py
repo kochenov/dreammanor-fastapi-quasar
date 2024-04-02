@@ -11,6 +11,6 @@ celery_app = Celery(
 celery_app.conf.beat_schedule = {
     "call_endpoint": {
         "task": "parsing_links_task",
-        "schedule": crontab(minute='*/60'),
+        "schedule": crontab(minute='*/15'),
     },
 }
