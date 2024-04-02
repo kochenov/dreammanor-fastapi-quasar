@@ -1,4 +1,4 @@
-name: Deploy FastAPI Application
+name: Deploy to Staging
 
 on:
   push:
@@ -7,23 +7,23 @@ on:
 
 jobs:
   deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
-
+    runs-on:
+      - self-hosted
+    env:
+      ENVIRONMENT: staging
+      DOMAIN: ${{ secrets.DOMAIN_STAGING }}
+      STACK_NAME: ${{ secrets.STACK_NAME_STAGING }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      FIRST_SUPERUSER: ${{ secrets.FIRST_SUPERUSER }}
+      FIRST_SUPERUSER_PASSWORD: ${{ secrets.FIRST_SUPERUSER_PASSWORD }}
+      #SMTP_HOST: ${{ secrets.SMTP_HOST }}
+      #SMTP_USER: ${{ secrets.SMTP_USER }}
+      #SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+      EMAILS_FROM_EMAIL: ${{ secrets.EMAILS_FROM_EMAIL }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      #SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
-    - name: Install Docker
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y docker.io docker-compose
-
-    - name: Build and Run Docker Compose
-      run: |
-        sudo docker-compose up -d --build
-
-    - name: Check API Health
-      run: |
-        curl -s http://localhost:8000
-        echo ""
+      - name: Checkout
+        uses: actions/checkout@v4
+      - run: docker compose -f docker-compose.yml --project-name ${{ secrets.STACK_NAME_STAGING }} build
+      - run: docker compose -f docker-compose.yml --project-name ${{ secrets.STACK_NAME_STAGING }} up -d
