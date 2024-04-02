@@ -1,11 +1,21 @@
+import { routes as realEstateRoutes } from "src/modules/real_estate";
+
 
 const routes = [
   {
     path: '/',
+    name: 'home',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') }
+      { path: '/', component: () => import('pages/IndexPage.vue') }
     ]
+  },
+  {
+    path: "/real-estate",
+    name: "desk",
+    meta: {},
+    component: () => import("layouts/MainLayout.vue"),
+    children: [...realEstateRoutes],
   },
 
   // Always leave this as last one,

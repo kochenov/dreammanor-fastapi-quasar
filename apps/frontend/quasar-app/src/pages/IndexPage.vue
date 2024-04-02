@@ -1,9 +1,12 @@
 <template>
-  <q-page class="">
-    <tabs-component class="" />
-  </q-page>
+  <PageCard></PageCard>
 </template>
 
 <script setup>
-import TabsComponent from "components/blocks/tabs/TabsComponent.vue";
+import PageCard from "components/main/page/PageCard.vue"
 </script>
+
+<style lang="scss" scoped>
+
+
+</style>

@@ -12,6 +12,9 @@ import axios from 'axios'
 const api = axios.create({
   baseURL:  'http://dreammanor.ru/api/v1/',
   withCredentials: true,
+  headers: {
+    'Accept': 'application/json',
+  },
 });
 
 export default boot(({ app }) => {

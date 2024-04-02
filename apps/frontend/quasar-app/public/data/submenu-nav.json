@@ -99,7 +99,7 @@
     {
       "id": 1,
       "name": "/real-estate/parsing/list",
-      "path": "real-estate/parsing/list",
+      "path": "/real-estate/parsing/list",
       "label": "Недвижимость"
     },
     {
@@ -116,9 +116,9 @@
     },
     {
       "id": 4,
-      "name": "addAds",
+      "name": "create-new-announcement",
       "label": "Добавить объявление",
-      "path": "addAds"
+      "path": "/announcement/new"
     }
   ],
   "blogs": [

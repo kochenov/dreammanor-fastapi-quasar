@@ -1,13 +1,6 @@
 <template>
   <div class="row-grid">
-    <div v-if="parserStore.error.length > 0">
-      <q-banner v-for="i in parserStore.error" :key="i" inline-actions class="text-white bg-red">
-        {{ i }}
-      <template v-slot:action>
-        <q-btn flat color="white" @click="clearFilters()" label="Сбросить фильтр" />
-      </template>
-    </q-banner>
-    </div>
+
     <q-card
       v-for="item in items"
       :key="`xs-${item.id}`"

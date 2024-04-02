@@ -50,6 +50,8 @@ services:
     command: [ "/usr/src/app/docker/app.sh" ]
     depends_on:
       - db
+      - celery
+      - traefik
     networks:
       - default
       - traefik-public
@@ -99,9 +101,7 @@ services:
       - default
     depends_on:
       - redis
-      - backend
       - selenium-hub
-      - chrome
 
   flower:
     image: '${DOCKER_IMAGE_BACKEND?Variable not set}:${TAG-latest}'
@@ -142,6 +142,7 @@ services:
   redis:
     image: redis:7.2.4-alpine3.19
     container_name: redis_app
+    restart: always
     ports:
       - "6379:6379"
     networks:
@@ -154,13 +155,16 @@ services:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
+    restart: always
     networks:
       - default
   chrome:
     image: selenium/node-chrome:beta
+    container_name: chrome
     shm_size: 1gb
     depends_on:
       - selenium-hub
+    restart: always
     environment:
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
@@ -230,6 +234,8 @@ services:
       # Включение панели управления
       - --api.dashboard=true
       - --api.insecure=true
+    
+    restart: always
     # Подключение к сети
     networks:
       # Сеть traefik-public

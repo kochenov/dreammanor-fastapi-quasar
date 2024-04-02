@@ -5,6 +5,7 @@ from starlette import status
 
 from .repository import LinkRepository
 from .schemas import ReadLinkSchema, NewLinkSchema, UpdateLinkSchema, FilterLinkSchema
+from .utils.parsing_full_ads import ParsingFull
 
 router = APIRouter()
 
@@ -88,3 +89,14 @@ async def delite_link(id_link: int):
         return {"message": "Запись успешно удалена", "error": None}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"{e}")
+
+
+@router.get("/run/{link_id}", name="Запуск задачи парсинга")
+async def start_task_parsing_ads(link_id: int, task: BackgroundTasks):
+    link = await LinkRepository.get_one(id=link_id)
+    if link:
+        parsing = ParsingFull(link)
+        # task.add_task(parsing.run)
+        parsing.run()
+        return parsing.get_data()
+        # return {"message": "Задача запущена"}

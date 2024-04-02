@@ -14,7 +14,7 @@ export const useRealEstateParserStore = defineStore("realEstateParserStore", {
       size: 50, // количество items на страницу
       /* Фильтруем по полям таблицы */
       is_video: null, // items с видео
-      status_id: null, // статус items
+      status_id: 0, // статус items
       min_price: null, // минимальная цена items
       max_price: null, // максимальная цена items
     },
@@ -43,10 +43,12 @@ export const useRealEstateParserStore = defineStore("realEstateParserStore", {
         "is_video": false,
     }
      */
-    async getLinks(url=`/parsing/list`, filters=this.filters) {
+    async getLinks(filters=this.filters) {
+      this.loading = true;
       try {
+
         this.error = [];
-        let res = await parser.getItemsRepository(url, filters );
+        let res = await parser.getItems(`/parsing/list`, filters );
         if(res.status == 500){
           console.log(res.data.detail);
           this.error.push(res.data.detail)
@@ -57,13 +59,41 @@ export const useRealEstateParserStore = defineStore("realEstateParserStore", {
             color: "negative",
             position: "bottom",
           });
-
-          return;
+        }else{
+          this.parser_links = res;
         }
-        this.parser_links = res;
+
+
       } catch (error) {
         console.log(error);
       }
+      this.loading = false;
+
+    },
+    async updateLink(data) {
+      this.loading = true;
+      try {
+
+        this.error = [];
+        let res = await parser.updateItem(`/parsing/edit/${data.id}?status_id=${data.status_id}&comment=${data.comment || ''}` );
+        if(res.status == 500){
+          console.log(res.data.detail);
+          this.error.push(res.data.detail)
+          Notify.create({
+            message: res.data.detail,
+            type: 'negative',
+            color: "negative",
+            position: "bottom",
+          });
+          return;
+        }
+        await this.getLinks();
+      } catch (error) {
+        console.log(error);
+        this.loading = false;
+      }
+
+
     },
     async cleanFilters(){
       this.filters =  {

@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6666182c-9993-4efa-be4b-dd8bc7b6d8d1" name="Changes" comment="начало работы с frontend quasar" />
+    <list default="true" id="6666182c-9993-4efa-be4b-dd8bc7b6d8d1" name="Changes" comment="начало работы с frontend quasar">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/routers.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/routers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/boot/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/boot/axios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/components/blocks/tabs/TabsComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/components/blocks/tabs/TabsComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/components/blocks/tabs/TestPart1.vue" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/components/blocks/tabs/TestPart1.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/repository/parser.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/repository/parser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/store/parserStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/store/parserStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/pages/IndexPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/pages/IndexPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/router/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

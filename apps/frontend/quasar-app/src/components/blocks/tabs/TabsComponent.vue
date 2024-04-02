@@ -10,8 +10,11 @@
 
             <q-item-section>
               <q-item-label
-                >Объявления подготовленные для парсинга</q-item-label
-              >
+                >Объявления для парсинга
+                <q-badge outline v-if="parserStore.parser_links" align="middle" color="primary">
+                  {{ parserStore.parser_links.total || '0'}}
+                </q-badge>
+              </q-item-label>
               <q-item-label caption class="text-red-10">
                 Не опубликованные
               </q-item-label>
@@ -122,7 +125,13 @@
               icon="new_releases"
               label="Статус объявлений"
             >
-              <q-select v-model="parserStore.filters.status_id" @update:model-value="getListAsd()" emit-value :options="status_options" label="Выбери статус"
+              <q-select
+                v-model="parserStore.filters.status_id"
+                @update:model-value="getListAsd()"
+                emit-value
+                map-options
+                :options="status_options"
+                label="Выбери статус"
             /></q-expansion-item>
           </q-list>
         </q-card-section>
@@ -145,23 +154,23 @@ const price = ref({
   max: 650000,
 });
 const status_options = ref([
-        {
-          label: 'Не опубликован',
-          value: 0,
-        },
-        {
-          label: 'Не подходит',
-          value: 2,
-        },
-        {
-          label: 'Вертикальное видео',
-          value: 3,
-        },
-        {
-          label: 'Чёрный список',
-          value: 4,
-        }
-      ]);
+  {
+    label: "Не опубликован",
+    value: 0,
+  },
+  {
+    label: "Не подходит",
+    value: 2,
+  },
+  {
+    label: "Вертикальное видео",
+    value: 3,
+  },
+  {
+    label: "Чёрный список",
+    value: 4,
+  },
+]);
 
 const parserStore = useRealEstateParserStore();
 
