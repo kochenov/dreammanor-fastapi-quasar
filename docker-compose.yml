@@ -45,7 +45,8 @@ services:
     #    ports:
     #      - "8000:8000"
     restart: always
-    command: [ "/usr/src/app/docker/app.sh" ]
+    #command: [ "/usr/src/app/docker/app.sh" ]
+    command: sh -c "alembic upgrade head && gunicorn app.main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --config /usr/src/app/gunicorn_conf.py"
     depends_on:
       - db
       - celery
