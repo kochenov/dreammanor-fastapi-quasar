@@ -1,24 +1,29 @@
-name: Deploy FastAPI Application  # Название работы
+name: Deploy FastAPI Application
 
 on:
   push:
     branches:
-      - dev  # Запускать действие только при пуше в ветку main
+      - dev
 
 jobs:
   deploy:
-    name: Deploy  # Название задачи
-    runs-on: ubuntu-latest  # Использовать Ubuntu для выполнения действий
+    name: Deploy
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository  # Шаг: проверка репозитория
-      uses: actions/checkout@v2  # Использовать действие для клонирования репозитория
+    - name: Checkout Repository
+      uses: actions/checkout@v2
 
-    - name: Install Docker  # Шаг: установка Docker
+    - name: Install Docker
       run: |
         sudo apt-get update
         sudo apt-get install -y docker.io docker-compose
 
-    - name: Build and Run Docker Compose  # Шаг: сборка и запуск Docker Compose
+    - name: Build and Run Docker Compose
       run: |
         sudo docker-compose up -d --build
+
+    - name: Check API Health
+      run: |
+        curl -s http://localhost:8000
+        echo ""
