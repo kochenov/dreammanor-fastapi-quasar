@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "DreamManor - FastApi and Quasar"
 authors = ["kochenov <kochenof@yandex.ru>"]
 readme = "README.md"
-#package-mode = false
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -20,6 +20,7 @@ selenium = "^4.18.1"
 webdriver-manager = "^4.0.1"
 python-json-logger = "^2.0.7"
 flower = "^2.0.1"
+seleniumbase = "^4.25.3"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -1,5 +1,6 @@
 import asyncio
 
+from app.modules.real_estate.parsing.utils.parsing_full_ads import ParsingFull
 from app.tasks.celery import celery_app
 from app.modules.real_estate.parsing.utils.process import Process
 
@@ -10,7 +11,6 @@ from app.modules.real_estate.parsing.utils.process import Process
     ignore_result=True,
 )
 def parsing_links_task():
-
     # Создание объекта Process
     # Параметры: sort=True, agent=False
     process = Process(sort=True, agent=False)
@@ -21,3 +21,17 @@ def parsing_links_task():
     # Запуск process.run() в асинхронном режиме
     # Возвращает результат выполнения process.run()
     return loop.run_until_complete(process.run())
+
+
+@celery_app.task(name="parsing_full")
+def parsing_full_data_ads_task(link):
+    parsing = ParsingFull(link)
+    # Получение цикла событий
+    # loop = asyncio.get_event_loop()
+
+    # Запуск process.run() в асинхронном режиме
+    # Возвращает результат выполнения process.run()
+    # return loop.run_until_complete(parsing.run())
+    print("Запуск")
+    return parsing.run()
+

@@ -4,7 +4,7 @@
     <q-select
       :key="modal_form_add_region"
       class="col-12 col-sm"
-      v-model="form_data.region"
+      v-model="region"
       filled
       use-input
       input-debounce="0"
@@ -62,10 +62,10 @@
     <q-select
       :key="modal_form_add_district"
       class="col-12 col-sm"
-      v-model="form_data.district"
+      v-model="district"
       filled
-      :disable="!form_data.region && load_regions_status"
-      :error="!form_data.region"
+      :disable="!region && load_regions_status"
+      :error="!region"
       error-message="Выбирите сначала регион"
       use-input
       input-debounce="0"
@@ -93,7 +93,7 @@
         />
       </template>
       <q-dialog
-        v-if="form_data.region"
+        v-if="region"
         v-model="modal_form_add_district"
         persistent
         transition-show="flip-down"
@@ -124,7 +124,7 @@
     <q-select
       :key="modal_form_add_settlement_type"
       class="col-12 col-sm"
-      v-model="form_data.settlement_type"
+      v-model="settlement_type"
       filled
       use-input
       input-debounce="0"
@@ -134,9 +134,9 @@
       @filter="settlement_type_id_filter_fn"
       behavior="dialog"
       :loading="load_settlement_types_status"
-      :disable="!form_data.region || !form_data.district"
-      :error="!form_data.region || !form_data.district"
-      error-message="Выбирите сначала регион и район"
+      :disable="!region || !district"
+      :error="!region || !district"
+      error-message="Выберите сначала регион и район"
     >
       <template v-slot:no-option>
         <q-item>
@@ -197,14 +197,10 @@
       @blur="updateFullAdress"
       :key="modal_form_add_settlement"
       class="col-12 col-sm"
-      v-model="form_data.settlement"
+      v-model="settlement"
       filled
-      :disable="
-        !form_data.region || !form_data.district || !form_data.settlement_type
-      "
-      :error="
-        !form_data.region || !form_data.district || !form_data.settlement_type
-      "
+      :disable="!region || !district || !settlement_type"
+      :error="!region || !district || !settlement_type"
       error-message="Выбирите сначала регион, район и тип поселения"
       use-input
       input-debounce="0"
@@ -232,7 +228,7 @@
         />
       </template>
       <q-dialog
-        v-if="form_data.region && form_data.district"
+        v-if="region && district"
         v-model="modal_form_add_settlement"
         persistent
         transition-show="flip-down"
@@ -275,65 +271,62 @@
     class="q-my-md"
     filled
     autocomplete="Off"
-    v-model="form_data.full_adress"
+    v-model="full_adress"
     label="Полный адрес *"
     hint="Полный адрес в формате: Регион, район, село, улица, № дома"
     lazy-rules
     :rules="[(val) => (val && val.length > 0) || 'Заполнять обязательно']"
   />
+
+  <q-stepper-navigation>
+    <q-btn
+      @click="
+        full_adress &&
+        region &&
+        district &&
+        settlement_type &&
+        settlement ? $emit('step', 2) : Inform()
+      "
+      color="primary"
+      label="Продолжить"
+    />
+  </q-stepper-navigation>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
-
-// модели формы
-const full_adress = ref(); // полный адрес
-const region = ref(); // регион
-const district = ref(); // район
-const settlement = ref(); // поселение
-
-
-const form_data = ref({
-  title: "",
-  description: "",
-  meta_title: "",
-  meta_description: "",
-  status: false,
-  region: null,
-  district: null,
-  settlement_type: null,
-  settlement: null,
-  full_adress: null,
-  main_image: null,
-  video_zen: null,
-  video_rutube: null,
-  link_to_ads: null,
-  price: null,
-  area_of_house: null,
-  plot_area: null,
-  bathroom_in_house: false,
-  gaz: false,
-  uid: null,
-  //
-  number_of_rooms: null,
-  number_of_floors: null,
-  sauna: false,
-  plastic_windows: false,
-  bus_stop: false,
-  rail_station: false,
-  distance_to_the_river: null,
-  distance_to_the_lake: null,
-  there_is_a_forest_nearby: false,
-  distance_to_the_city: null,
-  gas_heating: false,
-  furnace_heating: false,
-  sewerage: false,
-  year_of_construction: null,
-  wall_material_id: null,
-  alarm_status: false,
+const props = defineProps({
+  location: {
+    type: Object,
+    default(rawProps) {
+      return {
+        full_adress: null,
+        region: {
+          region_type: null,
+          region_name: null,
+          full_name_region: null,
+        },
+        settlement: {
+          settlement_type: null,
+          settlement_name: null,
+          full_name_settlement: null,
+        },
+        district: {
+          district: null,
+          district_full_name: null,
+          district_type: null,
+        },
+      };
+    },
+  },
 });
 
+const full_adress = ref(props.location?.full_adress || null);
+const region = ref(props.location?.region?.full_name_region || null);
+const district = ref(props.location?.district.district_full_name || null);
+const settlement_type = ref(props.location?.settlement.settlement_type || null);
+const settlement = ref(props.location?.settlement.settlement_name || null);
 </script>
 
 <style lang="scss" scoped></style>

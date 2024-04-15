@@ -1,11 +1,15 @@
+from celery.result import AsyncResult
 from fastapi import APIRouter, BackgroundTasks, Query, Depends, HTTPException
 from fastapi_pagination import Page, paginate
 from fastapi_pagination.utils import disable_installed_extensions_check
 from starlette import status
+from starlette.responses import JSONResponse
 
+from app.tasks.celery import celery_app
 from .repository import LinkRepository
 from .schemas import ReadLinkSchema, NewLinkSchema, UpdateLinkSchema, FilterLinkSchema
 from .utils.parsing_full_ads import ParsingFull
+from app.tasks.tasks import parsing_full_data_ads_task
 
 router = APIRouter()
 
@@ -92,11 +96,28 @@ async def delite_link(id_link: int):
 
 
 @router.get("/run/{link_id}", name="Запуск задачи парсинга")
-async def start_task_parsing_ads(link_id: int, task: BackgroundTasks):
+async def start_task_parsing_ads(link_id: int):
     link = await LinkRepository.get_one(id=link_id)
+    _link = {
+        "id": link.id,
+        "title": link.title,
+        "link": link.link,
+        "link_img": link.link_img,
+        "price": link.price,
+        "is_video": link.is_video
+    }
     if link:
-        parsing = ParsingFull(link)
-        # task.add_task(parsing.run)
-        parsing.run()
-        return parsing.get_data()
+        task = parsing_full_data_ads_task.delay(_link)
+        return JSONResponse({"task_id": task.id})
         # return {"message": "Задача запущена"}
+
+
+@router.get("/tasks/{task_id}")
+def get_status(task_id):
+    task_result = AsyncResult(task_id, app=celery_app)
+    result = {
+        "task_id": task_id,
+        "task_status": task_result.status,
+        "task_result": task_result.result
+    }
+    return JSONResponse(result)

@@ -24,24 +24,25 @@
             :done="step > 1"
           >
             <!--Карточка в списке-->
-
-            <add-location />
-
-            <q-stepper-navigation>
-              <q-btn
-                @click="
-                  form_data.full_adress &&
-                  form_data.region &&
-                  form_data.district &&
-                  form_data.settlement_type &&
-                  form_data.settlement
-                    ? (step = 2)
-                    : Inform()
-                "
+            <div
+              class="flex flex-center"
+              v-if="parser.data_full_item && parser.data_full_item.task_status === 'PENDING'"
+            >
+              <q-circular-progress
+                indeterminate
+                size="50px"
+                :thickness="0.4"
+                font-size="50px"
                 color="primary"
-                label="Продолжить"
+                track-color="grey-3"
+                center-color="grey-8"
+                class="q-ma-md"
               />
-            </q-stepper-navigation>
+            </div>
+
+            {{ parser.data_full_item ? parser.data_full_item.task_result : '' }}
+
+            <add-location @step="e=>step=e" v-if="parser.data_full_item?.task_result?.location" :location="parser.data_full_item.task_result.location"/>
           </q-step>
 
           <q-step
@@ -565,17 +566,27 @@
 
 <script setup>
 import PageCard from "src/components/main/page/PageCard.vue";
-import AddLocation from "../components/form/create/AddLocation.vue"
+import AddLocation from "../components/form/create/AddLocation.vue";
 import { ref, watch, onMounted, computed } from "vue";
+import { useRoute } from "vue-router";
+import { useRealEstateParserStore } from "../store/parserStore";
+import { LocalStorage } from "quasar";
+
+/** данные  адреса*/
+const route = useRoute();
+/** store */
+const parser = useRealEstateParserStore();
+const data = ref();
 
 const step = ref(1);
 const image = ref(null);
 
-const curr_yaer = computed(() => {
+const curr_year = computed(() => {
   const now = new Date();
   const currentYear = now.getFullYear();
   return currentYear;
 });
+
 // форм
 const form_data = ref({
   title: "",
@@ -616,6 +627,38 @@ const form_data = ref({
   wall_material_id: null,
   alarm_status: false,
 });
+
+onMounted(async () => {
+  await getFullData();
+});
+
+/* Проверить результат */
+const getStatus = async (task_id) => {
+  await parser.getResultTaskFullData(task_id);
+  const taskStatus = parser.$state.data_full_item.task_status;
+  if (taskStatus === "SUCCESS" || taskStatus === "failed"){
+    if(parser.data_full_item.task_result && parser.data_full_item.task_result.location){
+      form_data.value = parser.data_full_item.task_result;
+    }
+    return false;
+  }
+  setTimeout(function () {
+    getStatus(LocalStorage.getItem(route.query.link_id));
+  }, 1000);
+};
+
+/** получить данные задачи */
+const getFullData = async () => {
+  if (route.query.link_id) {
+    if (!LocalStorage.getItem(route.query.link_id)) {
+      await parser.callTaskGetFullData(route.query.link_id);
+      if (parser.data_task.task_id) {
+        LocalStorage.set(route.query.link_id, parser.data_task.task_id);
+      }
+    }
+    await getStatus(LocalStorage.getItem(route.query.link_id));
+  }
+};
 </script>
 
 <style lang="scss" scoped></style>

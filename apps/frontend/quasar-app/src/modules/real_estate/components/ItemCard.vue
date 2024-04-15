@@ -55,6 +55,7 @@
         <q-fab-action
           label="Опубликовать"
           label-position="left"
+          :to="`/announcement/new?link_id=${item.id}`"
           external-label
           color="positive"
           icon="post_add"

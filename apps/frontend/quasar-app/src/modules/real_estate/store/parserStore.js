@@ -6,6 +6,8 @@ export const useRealEstateParserStore = defineStore("realEstateParserStore", {
   state: () => ({
     loading: false, // Пока тру, идёт загрузка
     parser_links: null, // список страниц для парсера
+    data_full_item: null, // спарсиные данные объявления
+    data_task: null, // ранит данные о задаче
     /* Фильтры */
     filters: {
       /* пагинация */
@@ -19,7 +21,6 @@ export const useRealEstateParserStore = defineStore("realEstateParserStore", {
       max_price: null, // максимальная цена items
     },
     error: [],
-
   }),
 
   /**
@@ -43,45 +44,44 @@ export const useRealEstateParserStore = defineStore("realEstateParserStore", {
         "is_video": false,
     }
      */
-    async getLinks(filters=this.filters) {
+    async getLinks(filters = this.filters) {
       this.loading = true;
       try {
-
         this.error = [];
-        let res = await parser.getItems(`/parsing/list`, filters );
-        if(res.status == 500){
+        let res = await parser.getItems(`/parsing/list`, filters);
+        if (res.status == 500) {
           console.log(res.data.detail);
-          this.error.push(res.data.detail)
+          this.error.push(res.data.detail);
           this.parser_links = [];
           Notify.create({
             message: res.data.detail,
-            type: 'negative',
+            type: "negative",
             color: "negative",
             position: "bottom",
           });
-        }else{
+        } else {
           this.parser_links = res;
         }
-
-
       } catch (error) {
         console.log(error);
       }
       this.loading = false;
-
     },
     async updateLink(data) {
       this.loading = true;
       try {
-
         this.error = [];
-        let res = await parser.updateItem(`/parsing/edit/${data.id}?status_id=${data.status_id}&comment=${data.comment || ''}` );
-        if(res.status == 500){
+        let res = await parser.updateItem(
+          `/parsing/edit/${data.id}?status_id=${data.status_id}&comment=${
+            data.comment || ""
+          }`
+        );
+        if (res.status == 500) {
           console.log(res.data.detail);
-          this.error.push(res.data.detail)
+          this.error.push(res.data.detail);
           Notify.create({
             message: res.data.detail,
-            type: 'negative',
+            type: "negative",
             color: "negative",
             position: "bottom",
           });
@@ -92,11 +92,9 @@ export const useRealEstateParserStore = defineStore("realEstateParserStore", {
         console.log(error);
         this.loading = false;
       }
-
-
     },
-    async cleanFilters(){
-      this.filters =  {
+    async cleanFilters() {
+      this.filters = {
         /* пагинация */
         limit: 10, // Количество постов на странице
         page: 1, // Номер текущей страницы
@@ -107,7 +105,54 @@ export const useRealEstateParserStore = defineStore("realEstateParserStore", {
         min_price: null, // минимальная цена items
         max_price: null, // максимальная цена items
       };
-    }
+    },
+    async callTaskGetFullData(id) {
+      this.loading = true;
+      try {
+        this.error = [];
+        let res = await parser.getItem(`/parsing/run/${id}`);
+        if (res.status == 500) {
+          console.log(res.data.detail);
+          this.error.push(res.data.detail);
+          this.data_task = null;
+          Notify.create({
+            message: res.data.detail,
+            type: "negative",
+            color: "negative",
+            position: "bottom",
+          });
+        } else {
+          this.data_task = res;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      this.loading = false;
+    },
+
+    async getResultTaskFullData(task_id) {
+      this.loading = true;
+      try {
+        this.error = [];
+        let res = await parser.getItem(`/parsing/tasks/${task_id}`);
+        if (res.status == 500) {
+          console.log(res.data.detail);
+          this.error.push(res.data.detail);
+          this.data_full_item = null;
+          Notify.create({
+            message: res.data.detail,
+            type: "negative",
+            color: "negative",
+            position: "bottom",
+          });
+        } else {
+          this.data_full_item = res;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      this.loading = false;
+    },
   },
 
   getters: {},

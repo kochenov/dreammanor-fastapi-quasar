@@ -1,7 +1,10 @@
+import time
+
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from app.core.config import settings
 from app.core.logger import logger
 
 
@@ -12,6 +15,11 @@ class WebDriverCurrent:
         self.options = self._get_default_options()
 
     def _get_default_options(self):
+        """
+        Опции браузера
+        Returns:
+
+        """
         try:
             options = webdriver.ChromeOptions()
             prefs = {"profile.managed_default_content_settings.images": 2}
@@ -45,7 +53,6 @@ class WebDriverCurrent:
         except Exception as e:
             logger.info(f"web_driver_current: Ошибка настроек браузера: {e}")
 
-
     def _get_driver(self):
         """
         Получение драйвера веб браузера
@@ -70,10 +77,16 @@ class WebDriverCurrent:
 
         """
         try:
-            logger.info("web_driver_current: Начался процесс получения драйвера")
-            executor = f'http://{settings.SELENIUM_HUB_HOST}:4444/wd/hub'
-            driver = webdriver.Remote(command_executor=executor, options=self.options)
-            logger.info("web_driver_current: Драйвер браузера успешно получен")
+            # logger.info("web_driver_current: Начался процесс получения драйвера")
+            # executor = f'http://{settings.SELENIUM_HUB_HOST}:4444/wd/hub'
+            # driver = webdriver.Remote(command_executor=executor, options=self.options)
+            # logger.info("web_driver_current: Драйвер браузера успешно получен")
+            # return driver
+
+            chrome = ChromeDriverManager().install()
+            driver = webdriver.Chrome(
+                service=ChromeService(chrome), options=self.options
+            )
             return driver
         except Exception as e:
             logger.warning(f"web_driver_current: Ошибка при получении драйвера браузера: `{e}`")
@@ -83,7 +96,13 @@ class WebDriverCurrent:
         logger.info("web_driver_current: Начался процесс установки COOKIE")
         try:
             if cookie is None:
-                cookie = {"name": "view", "value": "gallery"}
+                cookie = {
+                    "name": "view",
+                    "value": "gallery",
+                    "buyer_location_id": "621540",
+                    "dfp_group": "79",
+                    "u": "32fwt7sh.13g5ayo.1n7tvkq6yo300"
+                }
             driver.get(self.AVITO_BASE)
             driver.add_cookie(cookie)
             logger.info("web_driver_current: Процесс получения COOKIE успешно закончен")
@@ -92,10 +111,9 @@ class WebDriverCurrent:
             logger.warning(f"web_driver_current: Ошибка в процесс получения COOKIE: {e} ")
 
     def get_source_page(self, url, num_page: int):
-        driver = None
+        driver = self._add_cookie(self._get_driver())
         logger.info("web_driver_current: Процесс получения содержимого HTML страницы")
         try:
-            driver = self._add_cookie(self._get_driver())
             driver.get(f"{url}&p={num_page or 1}")
             source = driver.page_source
             logger.info("web_driver_current: Содержимое HTML страницы успешно получено")
@@ -103,7 +121,7 @@ class WebDriverCurrent:
         except Exception as e:
             logger.warning(f"web_driver_current: Ошибка в процессе получения HTML страницы: {e}")
         finally:
-            if driver is not None:
+            if driver:
                 driver.quit()
                 logger.info("web_driver_current: Драйвер отключен")
 
@@ -134,19 +152,22 @@ class WebDriverCurrent:
                 driver.quit()
 
     def get_source_full_page(self, url):
-        driver = None
-
+        driver = self._add_cookie(self._get_driver())
         try:
-            driver = self._get_driver()
+            time.sleep(120)
             driver.get(f"{url}")
             source = driver.page_source
+            # print(source)
+            if not source:
+                raise ValueError("get_source_full_page: не удалось получить код страницы")
             return self._get_html(source)
         except Exception as e:
             print(f"{e}")
+
         finally:
-            if driver is not None:
-                driver.quit()
+            driver.quit()
 
     def _get_html(self, source: str) -> BeautifulSoup:
         """Получить содержимого в формате BS4"""
+        logger.info(f"web_driver_current: Трансформирую код HTML в формат BS4")
         return BeautifulSoup(source, "html.parser")

@@ -1,6 +1,9 @@
 from bs4 import BeautifulSoup
 import re
 
+from fastapi import HTTPException
+
+from app.core.logger import logger
 from .locations import HelperLocation
 from .web_driver_current import WebDriverCurrent
 
@@ -30,29 +33,41 @@ class ParsingFull:
     _source: BeautifulSoup
 
     def __init__(self, link):
+        logger.info("parsing_full_ads: Запущен процесс парсинга")
         self._link = link
-        self._url = link.link
-        self._image = link.link_img if link.link_img else self._get_image()
-        self._title = link.title if link.title else None
-        self._price = link.price if link.price else None
+        self._url = link["link"]
+        self._image = link["link_img"] if link["link_img"] else self._get_image()
+        self._title = link["title"] if link["title"] else None
+        self._price = link["price"] if link["price"] else None
 
     def _get_src_page(self, url: str):
         """Получить код страницы"""
-        self._source = WebDriverCurrent().get_source_full_page(url)
+        return WebDriverCurrent().get_source_full_page(url)
 
     def run(self):
-        self._get_src_page(self._url)
-        self._get_area_house()
-        self._get_land_area()
-        self._get_location()
-        self._get_distance_to_city()
-        self._get_year_of_construction()
-        self._get_wall_material()
-        self._get_bathroom()
-        self._get_communications()
-        if self._link.is_video:
+        source = self._get_src_page(self._url)
+        print(source.title.text)
+        # получить код страницы в формате bs4
+        if not source:
+            raise ValueError(f"Не удалось получить содержимое страницы")
+
+        if source.title.text == 'Доступ ограничен: проблема с IP':
+            logger(f"parsing_full_ads: Добавляю очередь для записи в БД")
+            print("Доступ ограничен: проблема с IP")
+            raise ValueError(f"'!!!Доступ ограничен: проблема с IP!!!'")
+
+        self._area_house = self._get_area_house(source)
+        self._land_area = self._get_land_area(source)
+        self._location = self._get_location(source)
+        self._distance_to_city = self._get_distance_to_city(source)
+        self._year_of_construction = self._get_year_of_construction(source)
+        self._wall_material = self._get_wall_material(source)
+        self._bathroom =  self._get_bathroom(source)
+        self._get_communications(source)
+        if self._link["is_video"]:
             self._get_video_url()
-        self._get_room_count()
+        self._get_room_count(source)
+        return self.get_data()
 
     def get_data(self) -> dict:
         self._data_source = {
@@ -75,78 +90,69 @@ class ParsingFull:
         }
         return self._data_source
 
-    def _get_area_house(self):
+    def _get_area_house(self, source):
         """Получить площадь дома"""
-        try:
-            area_house = self._source.find(string="Площадь дома").parent.next_sibling
-            self._area_house = int(float(area_house.text.split("\xa0")[0]))
-        except Exception as e:
-            print(f"Error [Не удалось получить площадь дома]: {e}")
+        area_house = source.find(string="Площадь дома").parent.next_sibling
+        if not area_house:
+            raise ValueError(f"[Не удалось получить площадь дома]")
+        return int(float(area_house.text.split("\xa0")[0]))
 
-    def _get_land_area(self):
+    def _get_land_area(self, source):
         """Получить площадь участка"""
-        try:
-            land_area = self._source.find(string="Площадь участка").parent.next_sibling
-            self._land_area = int(float(land_area.text.split("\xa0")[0]))
-        except Exception as e:
-            print(f"Error [Не удалось получить площадь участка]: {e}")
+        land_area = source.find(string="Площадь участка").parent.next_sibling
+        if not land_area:
+            raise ValueError(f"[Не удалось получить площадь участка]")
+        return int(float(land_area.text.split("\xa0")[0]))
 
-    def _get_location(self):
+    def _get_location(self, source):
         """Получить адрес"""
-        try:
-            element = self._source.find("div", itemprop="address")
-            location = element.find("span").text
+        element = source.find("div", itemprop="address")
+        location = element.find("span").text
+        if not element and not location:
+            raise ValueError("[Не удалось получить площадь участка]")
+        # self._location = location.split(", ")
+        return HelperLocation(location).location
 
-            # self._location = location.split(", ")
-            self._location = HelperLocation(location).location
-
-        except Exception as e:
-            print(f"Error [Не удалось получить площадь участка]: {e}")
-
-    def _get_distance_to_city(self):
+    def _get_distance_to_city(self, source) -> int | None:
         """Расстояние до города"""
-        try:
-            distance_to_city = self._source.find(
-                string="Расстояние до центра города"
-            ).parent.next_sibling
-            self._distance_to_city = int(distance_to_city.text.split("\xa0")[0])
-        except Exception as e:
-            print(f"Error [Не удалось получить расстояние до города]: {e}")
+        distance_to_city = source.find(
+            string="Расстояние до центра города"
+        ).parent.next_sibling
+        if not distance_to_city:
+            logger.info("[Не удалось получить расстояние до города]")
+            return
+        return int(distance_to_city.text.split("\xa0")[0])
 
-    def _get_year_of_construction(self):
+    def _get_year_of_construction(self, source) -> int | None:
         """Получить год постройки"""
-        try:
-            year_of_construction = self._source.find(string="Год постройки")
-            if year_of_construction:
-                self._year_of_construction = int(
-                    year_of_construction.parent.next_sibling.text
-                )
-        except Exception as e:
-            print(f"Error [Не удалось получить год постройки]: {e}")
+        year_of_construction = source.find(string="Год постройки")
+        if not year_of_construction:
+            logger.info("[Не удалось получить год постройки]")
+            return
+        return int(year_of_construction.parent.next_sibling.text)
 
-    def _get_wall_material(self):
+    def _get_wall_material(self, source) -> str | None:
         """Получить материал дома"""
-        try:
-            wall_material = self._source.find(string="Материал стен")
-            if wall_material:
-                self._wall_material = wall_material.parent.next_sibling.text
-        except Exception as e:
-            print(f"Error [Не удалось получить информацию о материале дома]: {e}")
+        wall_material = source.find(string="Материал стен")
+        if not wall_material:
+            logger.info(f"[Не удалось получить информацию о материале дома]")
+            return
+        return wall_material.parent.next_sibling.text
 
-    def _get_bathroom(self):
+    def _get_bathroom(self, source):
         """Наличие санузла в доме"""
-        try:
-            bathroom = self._source.find(string="Санузел")
-            if bathroom:
-                if bathroom.parent.next_sibling.text == "в доме":
-                    self._bathroom = True
-        except Exception as e:
-            print(f"Error [Не удалось получить информацию о материале дома]: {e}")
 
-    def _get_communications(self):
+        bathroom = source.find(string="Санузел")
+        if not bathroom:
+            logger.info("[Не удалось получить информацию о материале дома]")
+            return
+        elif bathroom.parent.next_sibling.text == "в доме":
+            return True
+
+    def _get_communications(self, source):
         """Наличие электричества"""
         try:
-            communications_el = self._source.find(string="Коммуникации")
+            communications_el = source.find(string="Коммуникации")
             if communications_el:
                 communications = communications_el.parent.next_sibling.text
                 communications_list = communications.split(", ")
@@ -191,10 +197,10 @@ class ParsingFull:
         except Exception as e:
             print(f"Error [Не удалось получить адрес видео]: {e}")
 
-    def _get_room_count(self):
+    def _get_room_count(self, source):
         """Количество комнат"""
         try:
-            room_count = self._source.find(string="Количество комнат")
+            room_count = source.find(string="Количество комнат")
             if room_count:
                 self._room_count = int(room_count.parent.next_sibling.text)
         except Exception as e:

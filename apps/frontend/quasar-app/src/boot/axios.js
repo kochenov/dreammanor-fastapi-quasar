@@ -8,9 +8,9 @@ import axios from 'axios'
 // "export default () => {}" function below (which runs individually
 // for each client)
 //const api = axios.create({ baseURL: 'http://dreammanor.com' })
-
+const domain = process.env.DEV ? 'http://127.0.0.1:8000' : 'http://dreammanor.ru'
 const api = axios.create({
-  baseURL:  'http://dreammanor.ru/api/v1/',
+  baseURL:  domain  + '/api/v1/',
   withCredentials: true,
   headers: {
     'Accept': 'application/json',

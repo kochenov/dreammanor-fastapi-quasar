@@ -56,13 +56,15 @@ class Settings(BaseSettings):
 
     API_V1_STR: str = "/api/v1"  # Версия API (строка)
     SECRET_KEY: str = secrets.token_urlsafe(32)  # Секретный ключ (генерируется автоматически)
+    REDIS_HOST: str = 'localhost'
 
     # Время жизни токена доступа в минутах (8 дней)
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
 
     DOMAIN: str = "localhost"  # Домен приложения
-    SELENIUM_HUB_HOST: str
+    SELENIUM_HUB_HOST: str = "http://localhost"
     ENVIRONMENT: Literal["local", "staging", "production"] = "local"  # Окружение (local, staging, production)
+    CHROME_DRIVER: str = "local"
 
     @computed_field  # Поле, вычисляемое автоматически
     @property
@@ -196,4 +198,3 @@ class Settings(BaseSettings):
 
 
 settings = Settings()  # type: ignore
-

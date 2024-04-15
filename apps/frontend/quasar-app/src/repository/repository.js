@@ -31,13 +31,12 @@ export const crud = {
   /**
    * Получение одной сущности с сервера
    * @param {*} url
-   * @param {*} filters
    * @returns
    */
-  async getItem(url, filters) {
+  async getItem(url) {
     try {
-      //let res = await api.get(url, {params: filters});
-      //return res.data;
+      let res = await api.get(url);
+      return res.data;
     } catch (error) {
       console.log(error.response);
       return error.response;
