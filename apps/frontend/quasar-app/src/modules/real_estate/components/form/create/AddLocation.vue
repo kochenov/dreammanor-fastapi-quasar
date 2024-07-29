@@ -1,8 +1,9 @@
 <template>
   <!-- Адрес -->
   <div class="row q-mt-sm wrap q-col-gutter-md">
+    <!-- Region -->
     <q-select
-      :key="modal_form_add_region"
+      :key="parser.url"
       class="col-12 col-sm"
       v-model="region"
       filled
@@ -58,7 +59,9 @@
         </q-card>
       </q-dialog>
     </q-select>
+    <!--/ Region -->
 
+    <!-- District-->
     <q-select
       :key="modal_form_add_district"
       class="col-12 col-sm"
@@ -120,7 +123,9 @@
         </q-card>
       </q-dialog>
     </q-select>
+    <!--/ District-->
 
+    <!-- Settlement Type-->
     <q-select
       :key="modal_form_add_settlement_type"
       class="col-12 col-sm"
@@ -192,7 +197,9 @@
         </q-card>
       </q-dialog>
     </q-select>
+    <!--/ Settlement Type-->
 
+    <!-- Settlement-->
     <q-select
       @blur="updateFullAdress"
       :key="modal_form_add_settlement"
@@ -262,6 +269,7 @@
         </q-card>
       </q-dialog>
     </q-select>
+    <!--/ Settlement-->
   </div>
 
   <q-separator color="orange q-my-lg" inset />
@@ -277,56 +285,132 @@
     lazy-rules
     :rules="[(val) => (val && val.length > 0) || 'Заполнять обязательно']"
   />
+  <!--/ Полный адрес -->
 
+  <!-- Button Next Step -->
   <q-stepper-navigation>
     <q-btn
       @click="
-        full_adress &&
-        region &&
-        district &&
-        settlement_type &&
-        settlement ? $emit('step', 2) : Inform()
+        full_adress && region && district && settlement_type && settlement
+          ? $emit('step', 2)
+          : Inform()
       "
       color="primary"
       label="Продолжить"
     />
   </q-stepper-navigation>
+  <!--/ Button Next Step -->
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { useRealEstateParserStore } from "../../../store/parserStore";
 
+onMounted(async () => {
+  await loadRegions();
+});
+
+const parser = useRealEstateParserStore();
+// props
 const props = defineProps({
+  // Данные локализации
   location: {
     type: Object,
     default(rawProps) {
       return {
-        full_adress: null,
+        full_adress: null, // полный адрес
         region: {
-          region_type: null,
-          region_name: null,
-          full_name_region: null,
+          region_type: null, // тип региона
+          region_name: null, // имя региона
+          full_name_region: null, // полное название региона
         },
         settlement: {
-          settlement_type: null,
-          settlement_name: null,
-          full_name_settlement: null,
+          settlement_type: null, // тип поселения
+          settlement_name: null, //  название поселения
+          full_name_settlement: null, // полное название поселения
         },
         district: {
-          district: null,
-          district_full_name: null,
-          district_type: null,
+          district: null, // район название
+          district_full_name: null, // полное название
+          district_type: null, // тип района
         },
       };
     },
   },
 });
 
+/**
+ * Основные данные формы для отправки и записи в БД
+ *
+ */
+//TODO Организовать хранение в LocalStorage
 const full_adress = ref(props.location?.full_adress || null);
 const region = ref(props.location?.region?.full_name_region || null);
 const district = ref(props.location?.district.district_full_name || null);
 const settlement_type = ref(props.location?.settlement.settlement_type || null);
 const settlement = ref(props.location?.settlement.settlement_name || null);
+
+/**
+ * Служебные данные: регион
+ */
+
+// Добавление нового региона
+const modal_form_add_region = ref(false);
+const new_region = ref(null); // model новый регион
+
+const save_new_region_to_base = async () => {
+  if (new_region.value) {
+    await estateStore.addNewRegion({ label: new_region.value });
+    new_region.value = null;
+    if (!parser.error) {
+      loadRegions();
+      modal_form_add_region.value = false;
+    }
+  }
+};
+// Отображение списка, фильтрация и выбор региона
+const region_id_string_options = ref();
+const region_id_options = ref(region_id_string_options.value);
+const region_id_filter_fn = (val, update) => {
+  if (val === "") {
+    console.log(region_id_string_options.value);
+    update(() => {
+      region_id_options.value = region_id_string_options.value;
+    });
+    return;
+  }
+
+  update(() => {
+    const needle = val.toLowerCase();
+    region_id_options.value = region_id_string_options.value.filter(
+      (v) => v.label.toLowerCase().indexOf(needle) > -1
+    );
+  });
+  console.log(region_id_string_options.value);
+};
+
+/** Загрузка и обновление регионов */
+const load_regions_status = ref(false);
+const loadRegions = async () => {
+  load_regions_status.value = true;
+  //--
+
+  district.value = null;
+  settlement_type.value = null;
+  settlement.value = null;
+
+  //--
+  await parser.getRegions();
+
+  region_id_string_options.value = parser.list_regions;
+  console.log(region_id_string_options);
+  // if (region_id_string_options.value) {
+  //   setTimeout(() => {
+  //     load_regions_status.value = false;
+  //   }, 60);
+  //}
+  load_regions_status.value = false;
+};
 </script>
 
 <style lang="scss" scoped></style>

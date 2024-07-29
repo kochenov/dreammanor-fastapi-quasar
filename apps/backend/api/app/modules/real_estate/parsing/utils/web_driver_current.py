@@ -1,5 +1,5 @@
 import time
-
+#from seleniumbase import Driver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
@@ -18,7 +18,6 @@ class WebDriverCurrent:
         """
         Опции браузера
         Returns:
-
         """
         try:
             options = webdriver.ChromeOptions()
@@ -27,27 +26,13 @@ class WebDriverCurrent:
             options.add_argument("--disable-extensions")
             options.add_argument("--blink-settings=imagesEnabled=false")
             options.add_argument("--no-sandbox")
-            options.add_argument("--disable-gpu")
-            options.add_argument("--disable-background-networking")
-            options.add_argument("--disable-dev-shm-usage")
             options.add_argument("--log-level=3")  # fatal
             options.add_argument("--ignore-certificate-errors-spki-list")
             options.add_experimental_option("prefs", prefs)
             options.add_experimental_option("excludeSwitches", ["enable-logging"])
-            options.add_argument("window-size=1920,1080")
-            options.add_argument("--disable-extensions")
-            options.add_argument("--proxy-server='direct://'")
-            options.add_argument("--proxy-bypass-list=*")
+            options.add_argument("--window-size=1920,1080")  # Изменил на --window-size, убрал лишнюю строку
             options.add_argument("--start-maximized")
-            options.add_argument("--disable-dev-shm-usage")
-            options.add_argument("--disable-gpu")
-            options.add_argument("--disable-browser-side-navigation")
-            options.add_argument("--disable-infobars")
-            options.add_argument("--disable-features=site-per-process")
-            options.add_argument("--enable-features=NetworkServiceInProcess")
-            options.add_argument("--disable-extensions")
-            options.add_argument("--disable-default-apps")
-            options.add_argument("--disable-translate")
+            options.add_argument("--disable-default-apps")  # Убрал --disable-translate, т.к. уже используется --disable-default-apps
             logger.info(f"web_driver_current: Установка опций браузера...")
             return options
         except Exception as e:
@@ -77,16 +62,18 @@ class WebDriverCurrent:
 
         """
         try:
-            # logger.info("web_driver_current: Начался процесс получения драйвера")
+            logger.info("web_driver_current: Начался процесс получения драйвера")
             # executor = f'http://{settings.SELENIUM_HUB_HOST}:4444/wd/hub'
             # driver = webdriver.Remote(command_executor=executor, options=self.options)
             # logger.info("web_driver_current: Драйвер браузера успешно получен")
             # return driver
 
             chrome = ChromeDriverManager().install()
+            #driver = Driver(uc=True)
             driver = webdriver.Chrome(
                 service=ChromeService(chrome), options=self.options
             )
+            logger.info("web_driver_current: Драйвер браузера успешно получен")
             return driver
         except Exception as e:
             logger.warning(f"web_driver_current: Ошибка при получении драйвера браузера: `{e}`")
@@ -152,10 +139,12 @@ class WebDriverCurrent:
                 driver.quit()
 
     def get_source_full_page(self, url):
-        driver = self._add_cookie(self._get_driver())
+        #driver = self._add_cookie(self._get_driver())
+        driver = self._get_driver()
         try:
-            time.sleep(120)
+            #time.sleep(4)
             driver.get(f"{url}")
+            #driver.uc_open_with_reconnect(url, 4)
             source = driver.page_source
             # print(source)
             if not source:

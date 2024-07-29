@@ -26,7 +26,10 @@
             <!--Карточка в списке-->
             <div
               class="flex flex-center"
-              v-if="parser.data_full_item && parser.data_full_item.task_status === 'PENDING'"
+              v-if="
+                parser.data_full_item &&
+                parser.data_full_item.task_status === 'PENDING'
+              "
             >
               <q-circular-progress
                 indeterminate
@@ -40,9 +43,15 @@
               />
             </div>
 
-            {{ parser.data_full_item ? parser.data_full_item.task_result : '' }}
+            <pre>{{
+              parser.data_full_item ? parser.data_full_item.task_result : ""
+            }}</pre>
 
-            <add-location @step="e=>step=e" v-if="parser.data_full_item?.task_result?.location" :location="parser.data_full_item.task_result.location"/>
+            <add-location
+              @step="(e) => (step = e)"
+              v-if="parser.data_full_item?.task_result?.location"
+              :location="parser.data_full_item.task_result.location"
+            />
           </q-step>
 
           <q-step
@@ -636,15 +645,18 @@ onMounted(async () => {
 const getStatus = async (task_id) => {
   await parser.getResultTaskFullData(task_id);
   const taskStatus = parser.$state.data_full_item.task_status;
-  if (taskStatus === "SUCCESS" || taskStatus === "failed"){
-    if(parser.data_full_item.task_result && parser.data_full_item.task_result.location){
+  if (taskStatus === "SUCCESS" || taskStatus === "failed") {
+    if (
+      parser.data_full_item.task_result &&
+      parser.data_full_item.task_result.location
+    ) {
       form_data.value = parser.data_full_item.task_result;
     }
     return false;
   }
   setTimeout(function () {
     getStatus(LocalStorage.getItem(route.query.link_id));
-  }, 1000);
+  }, 15000);
 };
 
 /** получить данные задачи */
@@ -661,4 +673,8 @@ const getFullData = async () => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.q-field--auto-height .q-field__control {
+  height: 56px;
+}
+</style>

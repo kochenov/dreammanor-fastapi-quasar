@@ -5,36 +5,82 @@ from pydantic import BaseModel, Field
 from sqlalchemy.dialects.postgresql import JSONB
 
 
-class FilterLinkSchema(BaseModel):
-    status_id: Optional[int] = Field(None, ge=0, le=4)
-    is_video: Optional[bool] = Field(None, description="Есть видео")
-    min_price: int = Field(1, ge=0)
-    max_price: int = Field(100000000, ge=0)
-
-    def dict(self, **kwargs):
-        data = super().dict(**kwargs)
-        return {key: value for key, value in data.items() if value is not None}
+class RegionBase(BaseModel):
+    label: str
 
 
-# **Базовая модель ссылки**
-class HouseSchema(BaseModel):
-    id: int = Field(..., description="Идентификатор объявления")
-    link: str = Field(..., description="Ссылка на Авито")  # Required link with regex validation
+class RegionCreate(BaseModel):
+    label: str
 
-    # 0 - загружен
-    # 1 - опубликован
-    # 2 - черновик
-    # 3 - запланированная публикация
-    # 4 - объявление не актуально
-    status_id: int = Field(..., ge=0, le=4, description="Статус объявления")
-    price: int = Field(..., gt=0, description="Цена")  # Price with positive value constraint
-    title: str = Field(..., max_length=255, description="Название объявления")  # Title with max length constraint
-    is_video: bool = Field(False, description="Наличие видео")
-    comment: Optional[str] = Field(None, description="Комментарий к публикации")
-    link_img: Optional[str] = Field(None, description="Ссылка на изображение")
-    created_ad: datetime.datetime
-    data: JSONB
 
+class RegionUpdate(RegionBase):
+    pass
+
+
+class AddOkey(BaseModel):
+    status: str
+    data: Optional[str] = None
+    message: str
+
+
+class RegionRead(RegionBase):
     class Config:
         from_attributes = True
 
+
+class SettlemenTypeBase(BaseModel):
+    label: str
+    label_i: str
+
+
+class SettlemenTypeCreate(SettlemenTypeBase):
+    pass
+
+
+class SettlemenTypeUpdate(SettlemenTypeBase):
+    pass
+
+
+class SettlemenTypeRead(SettlemenTypeBase):
+    class Config:
+        from_attributes = True
+
+
+class DistrictBase(BaseModel):
+    label: str
+    region_id: int
+
+
+class DistrictCreate(DistrictBase):
+    pass
+
+
+class DistrictUpdate(DistrictBase):
+    pass
+
+
+class DistrictRead(DistrictBase):
+    class Config:
+        from_attributes = True
+
+
+class SettlementBase(BaseModel):
+    settlement_types_id: int
+
+
+class SettlementCreate(SettlementBase):
+    pass
+
+
+class SettlementUpdate(SettlementBase):
+    pass
+
+
+class SettlementListRead(SettlementBase):
+    class Config:
+        from_attributes = True
+
+
+class SettlementRead(SettlementBase):
+    class Config:
+        from_attributes = True

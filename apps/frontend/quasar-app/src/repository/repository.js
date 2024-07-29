@@ -19,7 +19,7 @@ export const crud = {
    * @param {*} filters
    * @returns
    */
-  async getItems(url, filters) {
+  async getItems(url, filters=null) {
     try {
       let res = await api.get(url, {params: filters});
       return res.data;

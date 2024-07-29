@@ -122,6 +122,16 @@
             </q-card-actions>
           </q-card>
         </div>
+        <div class="q-pa-lg flex flex-center">
+          <q-pagination
+            v-model="current"
+            :to-fn="page => ({ query: { page } })"
+            :max-pages="6"
+            boundary-numbers
+            :max="parser.parser_links?.pages || 1"
+            direction-links
+          />
+        </div>
       </template>
     </page-card>
     <q-dialog v-model="edit_form_comment_flag" persistent>
@@ -161,10 +171,17 @@
 import PageCard from "components/main/page/PageCard.vue";
 import ItemCard from "../components/ItemCard.vue";
 import { useRealEstateParserStore as parserStore } from "../index";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 
+import { useRoute, useRouter } from 'vue-router';
+
+// Получаем параметры маршрута и роутера
+const route = useRoute();
+const router = useRouter();
 // Pinia
 const parser = parserStore();
+//const current = ref(parser.parser_links?.page || 1);
+const current = ref(Number(route.query.page) || 1);
 // Flags
 const edit_form_comment_flag = ref(false);
 // edit form
@@ -206,16 +223,26 @@ onMounted(async () => {
 });
 
 const getLinks = async () => {
+  parser.filters.page = parser.parser_links && Number(route.query.page) <= parser.parser_links.pages ? route.query.page : 1;
   await parser.getLinks();
 };
 
+// Следим за изменением параметра страницы в URL
+watch( () => route.query.page, async (newPage) => {
+  current.value = Number(newPage) || 1;
+  //parser.filters.page = newPage;
+  await getLinks();
+});
+
 const updatePriceFilter = async () => {
+  parser.filters.page = 1;
   parser.filters.max_price = price.value.max;
   parser.filters.min_price = price.value.min;
   await getLinks();
 };
 
 const clearFilters = async () => {
+  parser.filters.page = 1;
   parser.cleanFilters();
   await getLinks();
 };

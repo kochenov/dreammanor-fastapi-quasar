@@ -8,6 +8,9 @@ export const useRealEstateParserStore = defineStore("realEstateParserStore", {
     parser_links: null, // список страниц для парсера
     data_full_item: null, // спарсиные данные объявления
     data_task: null, // ранит данные о задаче
+    /* Regions */
+    list_regions: null,
+
     /* Фильтры */
     filters: {
       /* пагинация */
@@ -153,7 +156,31 @@ export const useRealEstateParserStore = defineStore("realEstateParserStore", {
       }
       this.loading = false;
     },
+    async getRegions() {
+      this.loading = true;
+      try {
+        this.error = [];
+        let res = await parser.getItems(`/real-estate/regions/`);
+        if (res.status == 500) {
+          console.log(res.data.detail);
+          this.error.push(res.data.detail);
+          this.parser_links = [];
+          Notify.create({
+            message: res.data.detail,
+            type: "negative",
+            color: "negative",
+            position: "bottom",
+          });
+        } else {
+          this.list_regions = res;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      this.loading = false;
+    },
   },
+
 
   getters: {},
 });

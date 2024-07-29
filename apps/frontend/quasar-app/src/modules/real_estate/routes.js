@@ -4,6 +4,7 @@ export default [
     name: "ParsingLinks",
     meta: { auth: true, title: "Список объявлений" },
     component: () => import("./pages/ParsingListPage.vue"),
+    props: (route) => ({ page: Number(route.query.page) || 1 })
   },
   {
     path: "/announcement/new",

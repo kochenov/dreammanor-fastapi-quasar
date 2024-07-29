@@ -72,8 +72,8 @@ async def add_link(link_data: NewLinkSchema = Depends()) -> dict:
         raise HTTPException(status_code=500, detail=f"{e}")
 
 
-@router.delete("/delite/{id_link}", name="Удаление ссылки")
-async def delite_link(id_link: int):
+@router.delete("/delete/{id_link}", name="Удаление ссылки")
+async def delete_link(id_link: int):
     """
     Удаление записи об объявлении
 

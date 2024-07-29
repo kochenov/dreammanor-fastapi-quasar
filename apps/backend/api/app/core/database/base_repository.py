@@ -76,10 +76,9 @@ class BaseRepository:
                 select(cls.model)
                 .filter_by(**filters)
                 .order_by(cls.model.id.desc())
-                .limit(1)
             )
             result = await session.execute(query)
-            return result.scalar_one_or_none()
+            return result.scalars().all()
 
     @classmethod
     async def create(cls, **data):

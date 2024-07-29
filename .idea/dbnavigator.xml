@@ -30,6 +30,7 @@
     <connection id="75cafa42-db8d-41c3-9032-fbe4cb1ad1f2" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="75cafa42-db8d-41c3-9032-fbe4cb1ad1f2" dataset="public.settlements" active-filter-id="" />
     <filter-actions connection-id="75cafa42-db8d-41c3-9032-fbe4cb1ad1f2" dataset="public.links" active-filter-id="5f8a13f9-fb47-4847-88c3-183f1642e793">
       <filter id="5f8a13f9-fb47-4847-88c3-183f1642e793" name="1" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="id" operator="&gt;=" value="1" active="true" />

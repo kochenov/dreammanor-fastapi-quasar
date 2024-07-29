@@ -5,36 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6666182c-9993-4efa-be4b-dd8bc7b6d8d1" name="Changes" comment="начало работы с frontend quasar">
-      <change afterPath="$PROJECT_DIR$/apps/backend/api/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/backend/api/celerybeat-schedule.bak" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/backend/api/celerybeat-schedule.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/backend/api/celerybeat-schedule.dir" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/process.env.dev" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/.idea/api.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/core/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/core/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/core/database/base_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/core/database/base_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/houses/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/houses/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/houses/repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/houses/repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/houses/routers.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/houses/routers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/houses/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/houses/schemas.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/routers.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/routers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/utils/parsing_full_ads.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/utils/parsing_full_ads.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/utils/web_driver_current.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/utils/web_driver_current.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/tasks/celery.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/tasks/celery.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/tasks/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/tasks/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/routers.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/routers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/backend/api/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/boot/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/boot/axios.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/components/ItemCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/components/ItemCard.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/components/form/create/AddLocation.vue" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/components/form/create/AddLocation.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/pages/NewAnnouncementPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/pages/NewAnnouncementPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/pages/ParsingListPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/pages/ParsingListPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/store/parserStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/store/parserStore.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/repository/repository.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/repository/repository.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,6 +88,7 @@
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DOMAIN" value="localhost" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="SDK_NAME" value="Python 3.12 (api)" />
