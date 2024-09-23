@@ -4,25 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6666182c-9993-4efa-be4b-dd8bc7b6d8d1" name="Changes" comment="начало работы с frontend quasar">
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+    <list default="true" id="6666182c-9993-4efa-be4b-dd8bc7b6d8d1" name="Changes" comment="Fix all progress">
+      <change afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/auth_service/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dreammanor-fastapi-quasar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dreammanor-fastapi-quasar.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/core/database/base_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/core/database/base_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/houses/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/houses/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/houses/repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/houses/repository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/houses/routers.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/houses/routers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/houses/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/houses/schemas.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/routers.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/routers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/utils/parsing.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/utils/parsing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/utils/web_driver_current.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/real_estate/parsing/utils/web_driver_current.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/app/modules/routers.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/app/modules/routers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/api/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/components/form/create/AddLocation.vue" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/components/form/create/AddLocation.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/pages/NewAnnouncementPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/pages/NewAnnouncementPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/pages/ParsingListPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/pages/ParsingListPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/store/parserStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/modules/real_estate/store/parserStore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/frontend/quasar-app/src/repository/repository.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/frontend/quasar-app/src/repository/repository.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/api/celerybeat-schedule.dat" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/api/celerybeat-schedule.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/test.docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,11 +32,17 @@
       </list>
     </option>
   </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -54,25 +56,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/MyProgramm/dreammanor-fastapi-quasar/apps/backend/api&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
+    "Docker.test.docker-compose.yml: Compose Deployment.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "dev",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/MyProgramm/dreammanor-fastapi-quasar/apps/backend/api/app/core/auth",
+    "project.structure.last.edited": "Модули",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "com.jetbrains.python.black.configuration.BlackFormatterConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\MyProgramm\dreammanor-fastapi-quasar\apps\backend\api\app\core\auth" />
       <recent name="C:\MyProgramm\dreammanor-fastapi-quasar\apps\backend\api" />
       <recent name="C:\MyProgramm\dreammanor-fastapi-quasar\apps\backend\api\app\core" />
       <recent name="C:\MyProgramm\dreammanor-fastapi-quasar\apps\backend\api\docker" />
       <recent name="C:\MyProgramm\dreammanor-fastapi-quasar" />
-      <recent name="C:\MyProgramm\dreammanor-fastapi-quasar\apps\backend\api\app\modules\real_estate\parsing\utils" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\MyProgramm\dreammanor-fastapi-quasar\apps\backend\api\app\tasks" />
@@ -81,9 +89,10 @@
       <recent name="C:\MyProgramm\dreammanor-fastapi-quasar\apps\backend\api\app" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.FastApi">
+  <component name="RunManager" selected="Docker.test.docker-compose.yml: Compose Deployment">
     <configuration name="FastApi" type="PythonConfigurationType" factoryName="Python">
       <module name="dreammanor-fastapi-quasar" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -91,7 +100,6 @@
         <env name="DOMAIN" value="localhost" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.12 (api)" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -269,7 +277,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711649598804</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Fix all progress">
+      <option name="closed" value="true" />
+      <created>1722276273455</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1722276273455</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -292,6 +308,7 @@
     <MESSAGE value="Рабочий Парсинг списка ссылок Версия 1" />
     <MESSAGE value="Рабочий Парсинг списка ссылок Версия 1 / настройки" />
     <MESSAGE value="начало работы с frontend quasar" />
-    <option name="LAST_COMMIT_MESSAGE" value="начало работы с frontend quasar" />
+    <MESSAGE value="Fix all progress" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix all progress" />
   </component>
 </project>

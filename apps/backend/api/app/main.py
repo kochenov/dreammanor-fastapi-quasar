@@ -1,6 +1,7 @@
-from fastapi import FastAPI  # Импорт FastAPI для создания приложения
+from fastapi import FastAPI, Depends  # Импорт FastAPI для создания приложения
 
 from fastapi.routing import APIRoute  # Импорт класса APIRoute для работы с маршрутами
+from fastapi.security import HTTPBearer
 from fastapi_pagination import add_pagination
 
 from starlette.middleware.cors import CORSMiddleware  # Импорт CORSMiddleware для обработки CORS
@@ -30,6 +31,9 @@ app = FastAPI(
     openapi_url=f"{settings.API_V1_STR}/openapi.json",  # URL документации OpenAPI
     generate_unique_id_function=custom_generate_unique_id,  # Функция для уникальных ID маршрутов
 )
+
+http_bearer = HTTPBearer(auto_error=False) # Использование HTTPBearer для авторизации
+
 add_pagination(app)
 
 # Включение CORS middleware (при наличии разрешенных доменов в настройках)
@@ -45,6 +49,6 @@ if settings.BACKEND_CORS_ORIGINS:
     )
 
 # Подключение маршрутов из модуля routers с префиксом из настроек
-app.include_router(routers, prefix=settings.API_V1_STR)
+app.include_router(routers, prefix=settings.API_V1_STR, dependencies=[Depends(http_bearer)])
 
 

@@ -1,3 +1,6 @@
+import logging
+import pathlib
+
 from bs4 import BeautifulSoup
 import re
 
@@ -23,10 +26,16 @@ class Parsing:
     def get_count_pages(self, html: BeautifulSoup) -> int | None:
         """Получить количество страниц"""
         next_page_button = html.find("a", {"data-marker": "pagination-button/nextPage"})
-
         if next_page_button is not None:
             count_pages = next_page_button.previous_element.previous_element
-            if count_pages is not None:
+            logging.info(f"Количество страниц: {count_pages}")
+
+            # Проверка, что count_pages это строка и она содержит только цифры
+            if (
+                count_pages is not None
+                and isinstance(count_pages, str)
+                and count_pages.isdigit()
+            ):
                 return int(count_pages)
 
     def get_src_page(self, link: str, number_page: int = 1) -> BeautifulSoup:
@@ -83,3 +92,15 @@ class Parsing:
         if _link is not None:
             link = _link.get("data-marker")
             return link.split("slider-image/image-")[1]
+
+    @staticmethod
+    def write_html(file_name: str, content):
+        # Создаем или открываем файл для записи
+        file = pathlib.Path(file_name)
+
+        if not file.exists():
+            print(f'Файл "{file_name}" не найден, создаю новый...')
+            file.touch()
+
+        with open(file_name, "w", encoding="utf8") as f:
+            f.write(content)

@@ -1,10 +1,12 @@
 import time
-#from seleniumbase import Driver
-from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager
+# from seleniumbase import Driver
+# from selenium.webdriver.chrome.service import Service as ChromeService
+# from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+
+from app.core import settings
 from app.core.logger import logger
 
 
@@ -63,18 +65,18 @@ class WebDriverCurrent:
         """
         try:
             logger.info("web_driver_current: Начался процесс получения драйвера")
-            # executor = f'http://{settings.SELENIUM_HUB_HOST}:4444/wd/hub'
-            # driver = webdriver.Remote(command_executor=executor, options=self.options)
-            # logger.info("web_driver_current: Драйвер браузера успешно получен")
-            # return driver
-
-            chrome = ChromeDriverManager().install()
-            #driver = Driver(uc=True)
-            driver = webdriver.Chrome(
-                service=ChromeService(chrome), options=self.options
-            )
+            executor = f'{settings.SELENIUM_HUB_HOST}:4444/wd/hub'
+            driver = webdriver.Remote(command_executor=executor, options=self.options)
             logger.info("web_driver_current: Драйвер браузера успешно получен")
             return driver
+
+            # chrome = ChromeDriverManager().install()
+            #driver = Driver(uc=True)
+            # driver = webdriver.Chrome(
+            #     service=ChromeService(chrome), options=self.options
+            # )
+            # logger.info("web_driver_current: Драйвер браузера успешно получен")
+            # return driver
         except Exception as e:
             logger.warning(f"web_driver_current: Ошибка при получении драйвера браузера: `{e}`")
 
@@ -102,6 +104,7 @@ class WebDriverCurrent:
         logger.info("web_driver_current: Процесс получения содержимого HTML страницы")
         try:
             driver.get(f"{url}&p={num_page or 1}")
+            time.sleep(5)
             source = driver.page_source
             logger.info("web_driver_current: Содержимое HTML страницы успешно получено")
             return self._get_html(source)

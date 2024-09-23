@@ -18,9 +18,7 @@ disable_installed_extensions_check()
 
 @router.get("/list", name="Список ссылок для парсинга")
 # @cache(expire=10)
-async def get_links(
-        filters: FilterLinkSchema = Depends()
-) -> Page[ReadLinkSchema]:
+async def get_links(filters: FilterLinkSchema = Depends()) -> Page[ReadLinkSchema]:
     """
     Получить список ссылок для парсинга.
     """
@@ -104,7 +102,7 @@ async def start_task_parsing_ads(link_id: int):
         "link": link.link,
         "link_img": link.link_img,
         "price": link.price,
-        "is_video": link.is_video
+        "is_video": link.is_video,
     }
     if link:
         task = parsing_full_data_ads_task.delay(_link)
@@ -115,9 +113,23 @@ async def start_task_parsing_ads(link_id: int):
 @router.get("/tasks/{task_id}")
 def get_status(task_id):
     task_result = AsyncResult(task_id, app=celery_app)
+
+    # Safely handle task result
+    try:
+        result_data = (
+            task_result.result
+            if isinstance(
+                task_result.result, (dict, list, str, int, float, bool, type(None))
+            )
+            else str(task_result.result)
+        )
+    except Exception as e:
+        result_data = f"Error while retrieving result: {str(e)}"
+
     result = {
         "task_id": task_id,
         "task_status": task_result.status,
-        "task_result": task_result.result
+        "task_result": result_data,
     }
+
     return JSONResponse(result)

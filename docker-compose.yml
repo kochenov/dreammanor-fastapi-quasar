@@ -148,29 +148,29 @@ services:
     networks:
       - default
 
-#  selenium-hub:
-#    image: selenium/hub:latest
-#    container_name: selenium-hub
-#    ports:
-#      - "4442:4442"
-#      - "4443:4443"
-#      - "4444:4444"
-#    restart: always
-#    networks:
-#      - default
-#  chrome:
-#    image: selenium/node-chrome:beta
-#    container_name: chrome
-#    shm_size: 1gb
-#    depends_on:
-#      - selenium-hub
-#    restart: always
-#    environment:
-#      - SE_EVENT_BUS_HOST=selenium-hub
-#      - SE_EVENT_BUS_PUBLISH_PORT=4442
-#      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-#    networks:
-#      - default
+  selenium-hub:
+    image: selenium/hub:latest
+    container_name: selenium-hub
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
+    restart: always
+    networks:
+      - default
+  chrome:
+    image: selenium/node-chrome:beta
+    container_name: chrome
+    shm_size: 1gb
+    depends_on:
+      - selenium-hub
+    restart: always
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    networks:
+      - default
 
 # Сервис Traefik
   traefik:
@@ -251,4 +251,4 @@ networks:
   # Сеть traefik-public
   traefik-public:
     # Внешняя сеть
-    external: true
+#    external: true
