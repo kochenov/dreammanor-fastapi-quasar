@@ -2,7 +2,7 @@ export default [
   {
     path: "parsing/list",
     name: "ParsingLinks",
-    meta: { auth: true, title: "Список объявлений" },
+    meta: { auth: true,  superuser: true, title: "Список объявлений" },
     component: () => import("./pages/ParsingListPage.vue"),
     props: (route) => ({ page: Number(route.query.page) || 1 })
   },

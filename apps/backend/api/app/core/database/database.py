@@ -1,3 +1,4 @@
+import contextlib
 import datetime
 from typing import AsyncGenerator
 
@@ -19,7 +20,9 @@ async_session_maker = async_sessionmaker(
 
 # Базовая модель для сущностей (таблиц) базы данных
 class BaseModel(DeclarativeBase):
-    __abstract__ = True  # Абстрактный класс служит основой для создания конкретных моделей
+    __abstract__ = (
+        True  # Абстрактный класс служит основой для создания конкретных моделей
+    )
 
     # Автоматическое формирование названия таблицы на основе имени класса
     @declared_attr.directive
@@ -30,6 +33,14 @@ class BaseModel(DeclarativeBase):
     id: Mapped[int] = mapped_column(primary_key=True)
     created_ad = Column(DateTime, default=datetime.datetime.now())
     update_ad = Column(DateTime, nullable=True, default=None)
+
+
+@contextlib.asynccontextmanager
+async def get_async_session_user_create() -> AsyncGenerator[AsyncSession, None]:
+    # Создание асинхронного контекстного менеджера для сессии с помощью фабрики
+    async with async_session_maker() as session:
+        # Возврат сессии в качестве асинхронного генератора
+        yield session
 
 
 # Асинхронная функция для получения сессии базы данных

@@ -1,3 +1,4 @@
+import { routes as authRoutes } from "src/modules/auth";
 import { routes as realEstateRoutes } from "src/modules/real_estate";
 
 
@@ -26,4 +27,4 @@ const routes = [
   }
 ]
 
-export default routes
+export default [...routes, ...authRoutes];

@@ -17,7 +17,10 @@ from pydantic import (  # Импорт для объявления схемы к
 )
 
 from pydantic_core import MultiHostUrl  # Импорт для построения мультихостового URL
-from pydantic_settings import BaseSettings, SettingsConfigDict  # Импорт для объявления базового класса настроек
+from pydantic_settings import (
+    BaseSettings,
+    SettingsConfigDict,
+)  # Импорт для объявления базового класса настроек
 from typing_extensions import Self  # Импорт для использования типа Self
 
 
@@ -55,15 +58,20 @@ class Settings(BaseSettings):
     )
 
     API_V1_STR: str = "/api/v1"  # Версия API (строка)
-    SECRET_KEY: str = secrets.token_urlsafe(32)  # Секретный ключ (генерируется автоматически)
-    REDIS_HOST: str = 'localhost'
+    SECRET_KEY: str = secrets.token_urlsafe(
+        32
+    )  # Секретный ключ (генерируется автоматически)
+    REDIS_HOST: str = "localhost"
 
     # Время жизни токена доступа в минутах (8 дней)
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
 
     DOMAIN: str = "localhost"  # Домен приложения
     SELENIUM_HUB_HOST: str = "http://localhost"
-    ENVIRONMENT: Literal["local", "staging", "production"] = "local"  # Окружение (local, staging, production)
+    CELERY_TASK_INTERVAL: int = 60
+    ENVIRONMENT: Literal["local", "staging", "production"] = (
+        "local"  # Окружение (local, staging, production)
+    )
     CHROME_DRIVER: str = "local"
 
     @computed_field  # Поле, вычисляемое автоматически
@@ -80,9 +88,9 @@ class Settings(BaseSettings):
             return f"http://{self.DOMAIN}"
         return f"https://{self.DOMAIN}"
 
-    BACKEND_CORS_ORIGINS: Annotated[
-        list[AnyUrl] | str, BeforeValidator(parse_cors)
-    ] = []  # Разрешенные CORS-домены (список или строка)
+    BACKEND_CORS_ORIGINS: Annotated[list[AnyUrl] | str, BeforeValidator(parse_cors)] = (
+        []
+    )  # Разрешенные CORS-домены (список или строка)
 
     PROJECT_NAME: str  # Название проекта
     SENTRY_DSN: HttpUrl | None = None  # DSN для Sentry (необязательный)
@@ -117,7 +125,9 @@ class Settings(BaseSettings):
     SMTP_PORT: int = 587  # Порт SMTP-сервера
     SMTP_HOST: str | None = None  # Хост SMTP-сервера (необязательный)
     SMTP_USER: str | None = None  # Пользователь SMTP-сервера (необязательный)
-    SMTP_PASSWORD: str | None = None  # Пароль пользователя SMTP-сервера (необязательный)
+    SMTP_PASSWORD: str | None = (
+        None  # Пароль пользователя SMTP-сервера (необязательный)
+    )
     # TODO: Обновите тип на "email", если это позволяет "SQLModel".
     EMAILS_FROM_EMAIL: str | None = None  # Адрес отправителя email (необязательный)
     EMAILS_FROM_NAME: str | None = None  # Имя отправителя email (необязательный)
@@ -154,7 +164,16 @@ class Settings(BaseSettings):
     # TODO: Обновите тип на "email", если это позволяет "SQLModel".
     FIRST_SUPERUSER: str  # Логин первого суперпользователя
     FIRST_SUPERUSER_PASSWORD: str  # Пароль первого суперпользователя
-    USERS_OPEN_REGISTRATION: bool = False  # Разрешена ли свободная регистрация пользователей
+    USERS_OPEN_REGISTRATION: bool = (
+        False  # Разрешена ли свободная регистрация пользователей
+    )
+
+    RESET_PASSWORD_TOKEN_SECRET: str = secrets.token_urlsafe(
+        32
+    )  # Секретный ключ (генерируется автоматически)
+    VERIFICATION_TOKEN_SECRET: str = secrets.token_urlsafe(
+        32
+    )  # Секретный ключ (генерируется автоматически)
 
     def _check_default_secret(self, var_name: str, value: str | None) -> None:
         """

@@ -1,3 +1,7 @@
 __pycache__
 /database
 *.vscode
+*/.venv/
+/apps/backend/api/celerybeat-schedule.bak
+/apps/backend/api/celerybeat-schedule.dat
+/apps/backend/api/celerybeat-schedule.dir
